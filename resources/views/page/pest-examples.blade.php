@@ -4,7 +4,7 @@
             <div class="grid grid-cols-1 gap-7">
                 <!-- container grid start-->
 
-                <div class="p-5 bg-[#282a36] border-2 rounded-md text-teal-500">
+                <div class="p-5 bg-[#282a36] dark:bg-slate-800 border-2 border-slate-300 dark:border-slate-600 rounded-md text-teal-500">
                     <p class="mb-3 font-bold">Job Testing</p>
                     <pre data-enlighter-language="php">
                     
@@ -27,7 +27,7 @@ it('dispatches an import products from Api', function () {
                 </div>
 
 
-                <div class="p-5 bg-[#282a36] border-2 rounded-md text-teal-500">
+                <div class="p-5 bg-[#282a36] dark:bg-slate-800 border-2 border-slate-300 dark:border-slate-600 rounded-md text-teal-500">
                     <p class="mb-3 font-bold">Auth Route Testing</p>
                     <pre data-enlighter-language="php">
                   
@@ -86,7 +86,7 @@ it('authenticated user routing test dashboard/profil', function () {
 
 
 
-                <div class="p-5 bg-[#282a36] border-2 rounded-md text-teal-500">
+                <div class="p-5 bg-[#282a36] dark:bg-slate-800 border-2 border-slate-300 dark:border-slate-600 rounded-md text-teal-500">
                     <p class="mb-3 font-bold">Route Testing - RoutingTest.php</p>
                     <pre data-enlighter-language="php">
                         

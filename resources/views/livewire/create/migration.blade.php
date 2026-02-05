@@ -2,7 +2,7 @@
     <div class="container mx-auto">
         <div class="grid grid-cols-1 gap-5 mb-14">
             <div>
-                <x:miniHelper::form.lable>Table</x:miniHelper::form.lable>
+                <x:miniHelper::form.label>Table</x:miniHelper::form.label>
                 <x:miniHelper::form.select size="1" wire:model.live.debounce.500ms="table"
                     wire:change='getTable($event.target.value)'>
                     <option value=""></option>
@@ -13,7 +13,7 @@
             </div>
             <div class="flex items-end gap-5">
                 <div class="w-full">
-                    <x:miniHelper::form.lable>API URL</x:miniHelper::form.lable>
+                    <x:miniHelper::form.label>API URL</x:miniHelper::form.label>
                     <x:miniHelper::form.input type="text" wire:model.live='url' />
                 </div>
 
@@ -23,7 +23,7 @@
                         CALL
                     </button>
                 @else
-                    <button type="button" disabled class="px-5 py-2 text-white rounded-md bg-slate-300">
+                    <button type="button" disabled class="px-5 py-2 text-white rounded-md bg-slate-300 dark:bg-slate-600">
                         CALL
                     </button>
                 @endif
@@ -38,7 +38,7 @@
 
             @if (!empty($stub))
                 <div class="relative">
-                    <div class="p-5 text-slate-700 bg-slate-100 rounded-lg">
+                    <div class="p-5 text-slate-700 dark:text-slate-300 bg-slate-100 dark:bg-slate-800 rounded-lg">
                         <pre><code>{{ $stub }}</code></pre>
                     </div>
 
@@ -54,7 +54,7 @@
                         </button>
                     @else
                         <button type="button" wire:click='createFile'
-                            class="absolute z-20 p-1 text-blue-500 border-2 border-blue-500 rounded-md hover:text-white hover:bg-blue-500 top-5 right-4">
+                            class="absolute z-20 p-1 text-blue-500 dark:text-blue-400 border-2 border-blue-500 dark:border-blue-400 rounded-md hover:text-white hover:bg-blue-500 dark:hover:bg-blue-600 top-5 right-4">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                 stroke-linejoin="round">

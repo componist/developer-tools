@@ -15,7 +15,7 @@
                     <x:miniHelper::form.input type="text" wire:model.live='baseUrl' placeholder="{{ url('/') }}"
                         class="text-teal-500" />
                     @if ($baseUrl === null || empty($baseUrl))
-                        <button type="button" class="absolute w-5 h-5 top-2 right-4 text-slate-300 hover:text-teal-500"
+                        <button type="button" class="absolute w-5 h-5 top-2 right-4 text-slate-300 dark:text-slate-500 hover:text-teal-500 dark:hover:text-teal-400"
                             @click.prevent="$wire.set('baseUrl','{{ url('/') }}')">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -52,7 +52,7 @@
                         window.dispatchEvent(new Event('crawler-loop'));
                     </script>
 
-                    <div class="mb-4">
+                    <div class="mb-4 text-slate-600 dark:text-slate-400">
                         Fortschritt: {{ $content['done'] }} / {{ $content['total'] }}
                     </div>
 
@@ -65,7 +65,7 @@
             <x:miniHelper::block>
                 <table class="w-full">
                     <thead>
-                        <tr class="bg-slate-200">
+                        <tr class="bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">
                             <th class="px-5 py-2 text-left">URL</th>
                             <th class="px-5 py-2 text-center">Status</th>
                             <th class="px-5 py-2 text-center">Besucht</th>

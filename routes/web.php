@@ -3,9 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 if (env('APP_DEBUG') === true) {
-    Route::
-    // middleware(['auth','verified'])->
-    prefix('helper')->name('componist.mini-helper.')->group(function (): void {
+    Route::prefix('helper')->name('componist.mini-helper.')->group(function (): void {
         Route::view('/', 'miniHelper::page.helper')->name('index');
         Route::get('/mode', \Componist\Helper\Livewire\Model::class)->name('model');
         Route::get('/validation', \Componist\Helper\Livewire\Validation::class)->name('validation');
@@ -35,9 +33,9 @@ if (env('APP_DEBUG') === true) {
             Route::get('log', \Componist\Helper\Livewire\Setting\LogFile::class)->name('log');
         });
 
-        Route::view('grug', 'miniHelper::page.grud')->name('grud');
+        Route::view('crud', 'miniHelper::page.crud')->name('crud');
         Route::view('rest-api', 'miniHelper::page.rest-api')->name('rest-api');
-        Route::view('pest-exampels', 'miniHelper::page.pest-exampels')->name('pest-exampels');
+        Route::view('pest-examples', 'miniHelper::page.pest-examples')->name('pest-examples');
 
         Route::get('routes', function () {
             $routeCollection = Route::getRoutes();

@@ -10,18 +10,18 @@
                         Alle GET-Routes testen
                     </button>
                 </div>
-                <div x-cloak x-show="isTestingAll" wire:ignore class="bg-blue-50 border border-blue-200 rounded-lg p-4">
+                <div x-cloak x-show="isTestingAll" wire:ignore class="bg-blue-50 dark:bg-blue-900/30 border border-blue-200 dark:border-blue-700 rounded-lg p-4">
                     <div class="flex items-center justify-between mb-2">
-                        <span class="text-sm font-medium text-blue-900">
+                        <span class="text-sm font-medium text-blue-900 dark:text-blue-300">
                             Teste Routes... (<span x-text="testedCount"></span>/<span x-text="totalCount"></span>)
                         </span>
                         <span class="text-sm font-medium text-blue-900" x-text="progressPercent + '%'"></span>
                     </div>
-                    <div class="w-full bg-blue-200 rounded-full h-2.5 mb-2">
+                    <div class="w-full bg-blue-200 dark:bg-blue-800 rounded-full h-2.5 mb-2">
                         <div class="bg-blue-600 h-2.5 rounded-full transition-all duration-300"
                             :style="`width: ${progressPercent}%`"></div>
                     </div>
-                    <div x-show="currentTestingRoute" class="text-xs text-gray-600 font-mono">
+                    <div x-show="currentTestingRoute" class="text-xs text-gray-600 dark:text-slate-400 font-mono">
                         <span class="inline-flex items-center gap-1">
                             <svg class="animate-spin h-3 w-3 text-blue-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                                 <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
@@ -44,7 +44,7 @@
                             <div class="bg-gray-100 px-4 py-2 font-semibold text-gray-700 uppercase text-sm border-b border-gray-200 rounded-t-lg flex items-center justify-between">
                                 <div>
                                     /{{ $groupName === 'root' ? '' : $groupName }}
-                                    <span class="text-xs font-normal text-gray-500 ml-2">
+                                    <span class="text-xs font-normal text-gray-500 dark:text-slate-400 ml-2">
                                         ({{ count($groupRoutes) }} {{ count($groupRoutes) === 1 ? 'Route' : 'Routes' }})
                                     </span>
                                 </div>
@@ -57,7 +57,7 @@
                                 @if ($testableCount > 0)
                                     <div x-cloak x-show="testingGroup === '{{ $groupName }}'" class="flex flex-col gap-2">
                                         <div class="flex items-center gap-3">
-                                            <div class="text-xs text-gray-600">
+                                            <div class="text-xs text-gray-600 dark:text-slate-400">
                                                 (<span x-text="getGroupTestedCount('{{ $groupName }}')"></span>/{{ $testableCount }})
                                             </div>
                                             <div class="w-32 bg-gray-200 rounded-full h-2">
@@ -78,19 +78,19 @@
                             <div class="overflow-x-auto">
                                 <table class="w-full table-fixed border-collapse">
                                     <thead>
-                                        <tr class="bg-gray-50 border-b border-gray-200">
+                                        <tr class="bg-gray-50 dark:bg-slate-700 border-b border-gray-200 dark:border-slate-600">
                                             <th class="w-20 px-4 py-3 text-xs font-semibold text-gray-700 uppercase tracking-wider text-center">Method</th>
                                             <th class="px-4 py-3 text-xs font-semibold text-gray-700 uppercase tracking-wider text-left">URL</th>
                                             <th class="w-32 px-4 py-3 text-xs font-semibold text-gray-700 uppercase tracking-wider text-center">Status</th>
                                             <th class="w-24 px-4 py-3 text-xs font-semibold text-gray-700 uppercase tracking-wider text-center">Aktion</th>
                                         </tr>
                                     </thead>
-                                    <tbody class="bg-white divide-y divide-gray-200">
+                                    <tbody class="bg-white dark:bg-slate-800 divide-y divide-gray-200 dark:divide-slate-600">
                                         @foreach ($groupRoutes as $route)
                                             @php
                                                 $index = $route['originalIndex'] ?? null;
                                             @endphp
-                                            <tr class="hover:bg-gray-50 transition-colors">
+                                            <tr class="hover:bg-gray-50 dark:hover:bg-slate-700 transition-colors">
                                                 @switch($route['method'])
                                                     @case('GET')
                                                         <td class="px-4 py-3 text-center">
@@ -135,7 +135,7 @@
 
                                                 <td class="px-4 py-3 text-sm">
                                                     <a href="{{ $route['fullUrl'] }}" target="_blank"
-                                                        class="text-teal-600 hover:text-teal-800 hover:underline font-mono text-xs break-all">
+                                                        class="text-teal-600 dark:text-teal-400 hover:text-teal-800 dark:hover:text-teal-300 hover:underline font-mono text-xs break-all">
                                                         {{ $route['url'] }}
                                                     </a>
                                                 </td>
@@ -152,7 +152,7 @@
                                                     @elseif ($route['tested'] || $route['status'] !== null)
                                                         @if ($route['status'] === 200)
                                                             <span
-                                                                class="inline-flex items-center justify-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                                                                class="inline-flex items-center justify-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 dark:bg-green-900/40 text-green-800 dark:text-green-300">
                                                                 200 OK
                                                             </span>
                                                         @elseif ($route['status'] === 'error')
@@ -164,12 +164,12 @@
                                                         @elseif (is_numeric($route['status']))
                                                             @if ($route['status'] >= 200 && $route['status'] < 300)
                                                                 <span
-                                                                    class="inline-flex items-center justify-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                                                                    class="inline-flex items-center justify-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 dark:bg-green-900/40 text-green-800 dark:text-green-300">
                                                                     {{ $route['status'] }}
                                                                 </span>
                                                             @elseif ($route['status'] >= 300 && $route['status'] < 500)
                                                                 <span
-                                                                    class="inline-flex items-center justify-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
+                                                                    class="inline-flex items-center justify-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 dark:bg-yellow-900/40 text-yellow-800 dark:text-yellow-300">
                                                                     {{ $route['status'] }}
                                                                 </span>
                                                             @else
@@ -180,10 +180,10 @@
                                                                 </span>
                                                             @endif
                                                         @else
-                                                            <span class="text-gray-400 text-sm">-</span>
+                                                            <span class="text-gray-400 dark:text-slate-500 text-sm">-</span>
                                                         @endif
                                                     @else
-                                                        <span class="text-gray-400 text-sm">-</span>
+                                                        <span class="text-gray-400 dark:text-slate-500 text-sm">-</span>
                                                     @endif
                                                 </td>
                                                 <td class="px-4 py-3 text-center">
@@ -194,7 +194,7 @@
                                                         Testen
                                                     </button>
                                                     @else
-                                                        <span class="text-gray-400 text-sm">-</span>
+                                                        <span class="text-gray-400 dark:text-slate-500 text-sm">-</span>
                                                     @endif
                                                 </td>
                                             </tr>

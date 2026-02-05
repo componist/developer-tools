@@ -5,11 +5,11 @@
         <div class="flex items-end gap-5 mt-7">
 
             <div class="w-36">
-                <x:miniHelper::form.lable>Package Prefix:</x:miniHelper::form.lable>
+                <x:miniHelper::form.label>Package Prefix:</x:miniHelper::form.label>
                 <x:miniHelper::form.input type="text" wire:model.live='prefix' placeholder="core::" />
             </div>
             <div class="w-full">
-                <x:miniHelper::form.lable>Path:</x:miniHelper::form.lable>
+                <x:miniHelper::form.label>Path:</x:miniHelper::form.label>
                 <x:miniHelper::form.input type="text" wire:model.live='path' placeholder="{{ $path }}" />
             </div>
 
@@ -40,7 +40,7 @@
                     @endforeach
                 </div>
             @else
-                <p class="italic text-red-500">keine icons gefunden</p>
+                <p class="italic text-red-500 dark:text-red-400">keine icons gefunden</p>
             @endif
 
         </div>

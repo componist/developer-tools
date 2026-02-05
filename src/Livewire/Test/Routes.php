@@ -84,7 +84,7 @@ class Routes extends Component
             } else {
                 $parts = explode('/', $url);
                 // Get first level (e.g., 'users', 'dashboard', 'api')
-                $firstLevel = $parts[0] ?? 'root';
+                $firstLevel = ($parts[0] !== '') ? $parts[0] : 'root';
             }
             
             if (!isset($grouped[$firstLevel])) {

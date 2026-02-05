@@ -2,7 +2,7 @@
     <div class="container mx-auto">
         <div class="flex items-end justify-between gap-5">
             <div class="w-full">
-                <x:miniHelper::form.lable>Table</x:miniHelper::form.lable>
+                <x:miniHelper::form.label>Table</x:miniHelper::form.label>
                 <x:miniHelper::form.select size="1" wire:model.live.debounce.500ms="table"
                     wire:change='getTable($event.target.value)'>
                     <option value=""></option>
@@ -41,7 +41,7 @@
                 </div>
 
                 <div>
-                    <h2 class="mb-3 font-bold">Protected $casts</h2>
+                    <h2 class="mb-3 font-bold text-slate-700 dark:text-slate-300">Protected $casts</h2>
                     <x:miniHelper::block>
                         <pre data-enlighter-language="php">/**
 * The attributes that should be cast to native types.

@@ -3,7 +3,7 @@
         <div class="container px-3 mx-auto ">
             <div class="grid grid-cols-1 gap-7">
 
-                <div class="p-5 bg-[#282a36] border-2 rounded-md text-teal-500">
+                <div class="p-5 bg-[#282a36] dark:bg-slate-800 border-2 border-slate-300 dark:border-slate-600 rounded-md text-teal-500">
                     <p class="mb-3 font-bold">Create Methode</p>
                     <pre data-enlighter-language="php">
 public function create(CreateUserRequest $request): RedirectResponse
@@ -15,7 +15,7 @@ public function create(CreateUserRequest $request): RedirectResponse
 </pre>
                 </div>
 
-                <div class="p-5 bg-[#282a36] border-2 rounded-md text-teal-500">
+                <div class="p-5 bg-[#282a36] dark:bg-slate-800 border-2 border-slate-300 dark:border-slate-600 rounded-md text-teal-500">
                     <p class="mb-3 font-bold">Show Methode</p>
                     <pre data-enlighter-language="php">
 public function show(User $user): View
@@ -30,7 +30,7 @@ public function show(User $user): View
 
 
 
-                <div class="p-5 bg-[#282a36] border-2 rounded-md text-teal-500">
+                <div class="p-5 bg-[#282a36] dark:bg-slate-800 border-2 border-slate-300 dark:border-slate-600 rounded-md text-teal-500">
                     <p class="mb-3 font-bold">Edit Methode</p>
                     <pre data-enlighter-language="php">
 public function edit(User $user): View
@@ -45,7 +45,7 @@ public function edit(User $user): View
 
 
 
-                <div class="p-5 bg-[#282a36] border-2 rounded-md text-teal-500">
+                <div class="p-5 bg-[#282a36] dark:bg-slate-800 border-2 border-slate-300 dark:border-slate-600 rounded-md text-teal-500">
                     <p class="mb-3 font-bold">Update Methode</p>
                     <pre data-enlighter-language="php">
 public function update(UpdateUserRequest $request, User $user): RedirectResponse
@@ -57,7 +57,7 @@ public function update(UpdateUserRequest $request, User $user): RedirectResponse
 </pre>
                 </div>
 
-                <div class="p-5 bg-[#282a36] border-2 rounded-md text-teal-500">
+                <div class="p-5 bg-[#282a36] dark:bg-slate-800 border-2 border-slate-300 dark:border-slate-600 rounded-md text-teal-500">
                     <p class="mb-3 font-bold">Delete Methode</p>
                     <pre data-enlighter-language="php">
 public function destroy(User $user): RedirectResponse
@@ -70,7 +70,7 @@ public function destroy(User $user): RedirectResponse
                 </div>
 
 
-                <div class="p-5 bg-[#282a36] border-2 rounded-md text-teal-500">
+                <div class="p-5 bg-[#282a36] dark:bg-slate-800 border-2 border-slate-300 dark:border-slate-600 rounded-md text-teal-500">
                     <p class="mb-3 font-bold">Test Case</p>
                     <pre data-enlighter-language="php">               
 namespace Tests\Feature\Controllers\BlogController;

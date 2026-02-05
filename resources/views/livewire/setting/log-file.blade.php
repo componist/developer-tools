@@ -3,7 +3,7 @@
         <div class="mb-4 flex items-center justify-between">
             <div>
                 <h2 class="text-2xl font-bold mb-2">Laravel Logs</h2>
-                <p class="text-gray-600 dark:text-gray-400">Zeige die letzten {{ count($logs) }} Log-Einträge</p>
+                <p class="text-slate-600 dark:text-slate-400">Zeige die letzten {{ count($logs) }} Log-Einträge</p>
             </div>
             @if(count($logs) > 0)
                 <button 
@@ -27,7 +27,7 @@
                 <div 
                     wire:click="selectLog({{ $index }})"
                     class="border rounded-lg p-4 cursor-pointer transition-all hover:shadow-md
-                        {{ $selectedLogIndex === $index ? 'border-blue-500 bg-blue-50 dark:bg-blue-900/20' : 'border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800' }}"
+                        {{ $selectedLogIndex === $index ? 'border-blue-500 bg-blue-50 dark:bg-blue-900/20' : 'border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800' }}"
                 >
                     <div class="flex items-start justify-between mb-2">
                         <div class="flex items-center gap-2">
@@ -39,8 +39,8 @@
                                 @endif">
                                 {{ $log['level'] }}
                             </span>
-                            <span class="text-sm text-gray-500 dark:text-gray-400">{{ $log['timestamp'] }}</span>
-                            <span class="text-xs text-gray-400 dark:text-gray-500">{{ $log['environment'] }}</span>
+                            <span class="text-sm text-slate-500 dark:text-slate-400">{{ $log['timestamp'] }}</span>
+                            <span class="text-xs text-slate-400 dark:text-slate-500">{{ $log['environment'] }}</span>
                         </div>
                         <button 
                             wire:click.stop="deleteLog({{ $index }})"
@@ -52,18 +52,18 @@
                         </button>
                     </div>
                     
-                    <div class="text-sm text-gray-700 dark:text-gray-300 mb-2">
+                    <div class="text-sm text-slate-700 dark:text-slate-300 mb-2">
                         {{ $log['message'] }}
                     </div>
 
                     @if($selectedLogIndex === $index)
-                        <div class="mt-3 pt-3 border-t border-gray-200 dark:border-gray-700">
-                            <pre class="text-xs bg-gray-100 dark:bg-gray-900 p-3 rounded overflow-x-auto whitespace-pre-wrap">{{ $log['full_content'] }}</pre>
+                        <div class="mt-3 pt-3 border-t border-slate-200 dark:border-slate-600">
+                            <pre class="text-xs bg-slate-100 dark:bg-slate-900 text-slate-800 dark:text-slate-300 p-3 rounded overflow-x-auto whitespace-pre-wrap">{{ $log['full_content'] }}</pre>
                         </div>
                     @endif
                 </div>
             @empty
-                <div class="text-center py-8 text-gray-500 dark:text-gray-400">
+                <div class="text-center py-8 text-slate-500 dark:text-slate-400">
                     Keine Log-Einträge gefunden.
                 </div>
             @endforelse

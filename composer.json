@@ -12,6 +12,7 @@
         }
     ],
     "require": {
+        "guzzlehttp/guzzle": "^7.0",
         "livewire/livewire": "^3.0",
         "symfony/dom-crawler": "^7.3"
     },

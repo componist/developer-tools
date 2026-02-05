@@ -4,7 +4,7 @@
             <div class="grid grid-cols-1 gap-5">
 
 
-                <div class="p-5 bg-[#282a36] border-2 rounded-md text-teal-500">
+                <div class="p-5 bg-[#282a36] dark:bg-slate-800 border-2 border-slate-300 dark:border-slate-600 rounded-md text-teal-500">
                     <p class="mb-3 font-bold">routes/api.php</p>
                     <pre data-enlighter-language="php">
 Use App\Article;
@@ -37,7 +37,7 @@ Route::delete('articles/{id}', function($id) {
 </pre>
                 </div>
 
-                <div class="p-5 bg-[#282a36] border-2 rounded-md text-teal-500">
+                <div class="p-5 bg-[#282a36] dark:bg-slate-800 border-2 border-slate-300 dark:border-slate-600 rounded-md text-teal-500">
                     <p class="mb-3 font-bold">ArticleController.php</p>
                     <pre data-enlighter-language="php">
 use App\Article;
@@ -79,7 +79,7 @@ class ArticleController extends Controller
 </pre>
                 </div>
 
-                <div class="p-5 bg-[#282a36] border-2 rounded-md text-teal-500">
+                <div class="p-5 bg-[#282a36] dark:bg-slate-800 border-2 border-slate-300 dark:border-slate-600 rounded-md text-teal-500">
                     <p class="mb-3 font-bold">routes/api.php</p>
                     <pre data-enlighter-language="php">
 Route::get('articles', 'ArticleController@index');
@@ -91,7 +91,7 @@ Route::delete('articles/{id}', 'ArticleController@delete');
 </pre>
                 </div>
 
-                <div class="p-5 bg-[#282a36] border-2 rounded-md text-teal-500">
+                <div class="p-5 bg-[#282a36] dark:bg-slate-800 border-2 border-slate-300 dark:border-slate-600 rounded-md text-teal-500">
                     <p class="mb-3 font-bold">API ArticleController</p>
                     <pre data-enlighter-language="php">
 class ArticleController extends Controller

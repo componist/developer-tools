@@ -2,8 +2,8 @@
     <div x-data="{ showMsg: false }" class="container mx-auto">
 
         <div x-cloak x-show="showMsg" @click.away="showMsg = false"
-            class="fixed z-50 max-w-sm overflow-hidden bg-teal-100 border border-teal-300 rounded-md top-3 right-3">
-            <p class="flex items-center justify-center p-3 text-teal-600">Copied to Clipboard</p>
+            class="fixed z-50 max-w-sm overflow-hidden bg-teal-100 dark:bg-teal-900/40 border border-teal-300 dark:border-teal-700 rounded-md top-3 right-3">
+            <p class="flex items-center justify-center p-3 text-teal-600 dark:text-teal-300">Copied to Clipboard</p>
         </div>
 
 
@@ -22,7 +22,7 @@
                     <p class="text-2xl font-bold text-teal-500 uppercase ">{{ $key }}</p>
                 </div>
             @else
-                <p class="mb-2 ml-2 text-2xl font-bold uppercase text-slate-500 mt-14">{{ $key }}</p>
+                <p class="mb-2 ml-2 text-2xl font-bold uppercase text-slate-500 dark:text-slate-400 mt-14">{{ $key }}</p>
             @endif
 
             <x:miniHelper::block>
@@ -32,7 +32,7 @@
                             class="block px-5 py-1 text-white bg-teal-500 rounded-full shadow-sm hover:bg-teal-600"
                             @click.prevent="navigator.clipboard.writeText('{{ $artisan['name'] }}'), showMsg = true, setTimeout(() => showMsg = false, 1000)">{{ $artisan['name'] }}</button>
 
-                        <p>{{ $artisan['description'] }}</p>
+                        <p class="text-slate-600 dark:text-slate-400">{{ $artisan['description'] }}</p>
                     </x:miniHelper::item>
                 @endforeach
             </x:miniHelper::block>
