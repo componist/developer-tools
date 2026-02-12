@@ -48,6 +48,12 @@
                         SoftDeletes (benötigt <code>deleted_at</code>)
                     </span>
                 </label>
+
+                <label class="inline-flex items-center gap-2">
+                    <input type="checkbox" wire:model.live="generateFactory"
+                        class="rounded border-slate-300 text-teal-600 focus:ring-teal-500">
+                    <span class="text-slate-700 dark:text-slate-200">Factory generieren</span>
+                </label>
             </div>
 
             @if (! $hasDeletedAt)
@@ -56,7 +62,56 @@
                 </p>
             @endif
         @endif
-        
+
+        @if (isset($fields) && count($fields) >= 1 && $generateFactory)
+            <div class="mt-8">
+                <h2 class="mb-3 font-bold text-slate-800 dark:text-slate-100">Factory-Spalten konfigurieren</h2>
+                <p class="mb-3 text-sm text-slate-600 dark:text-slate-400">
+                    Pro Spalte den Faker-Typ wählen. Pflichtfelder (Null: NO) werden angezeigt; bei nullable Spalten kann optional <code>null</code> gesetzt werden.
+                </p>
+                <div class="overflow-x-auto rounded-lg border border-slate-200 dark:border-slate-600">
+                    <table class="min-w-full divide-y divide-slate-200 dark:divide-slate-600">
+                        <thead class="bg-slate-50 dark:bg-slate-800">
+                            <tr>
+                                <th class="px-4 py-2 text-left text-xs font-medium text-slate-600 dark:text-slate-300 uppercase">Spalte</th>
+                                <th class="px-4 py-2 text-left text-xs font-medium text-slate-600 dark:text-slate-300 uppercase">Typ</th>
+                                <th class="px-4 py-2 text-left text-xs font-medium text-slate-600 dark:text-slate-300 uppercase">Pflicht</th>
+                                <th class="px-4 py-2 text-left text-xs font-medium text-slate-600 dark:text-slate-300 uppercase">Faker-Typ</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-200 dark:divide-slate-600 bg-white dark:bg-slate-900">
+                            @foreach ($fields as $index => $field)
+                                @php
+                                    $colName = $field['Field'] ?? '';
+                                    $skip = in_array($colName, ['id', 'created_at', 'updated_at', 'deleted_at'], true);
+                                @endphp
+                                @if (! $skip)
+                                    <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/50">
+                                        <td class="px-4 py-2 text-sm font-mono text-slate-800 dark:text-slate-200">{{ $colName }}</td>
+                                        <td class="px-4 py-2 text-sm text-slate-600 dark:text-slate-400">{{ $field['Type'] ?? '' }}</td>
+                                        <td class="px-4 py-2 text-sm">
+                                            @if (($field['Null'] ?? '') === 'YES')
+                                                <span class="text-amber-600 dark:text-amber-400">nullable</span>
+                                            @else
+                                                <span class="text-slate-700 dark:text-slate-300">ja</span>
+                                            @endif
+                                        </td>
+                                        <td class="px-4 py-2">
+                                            <x:developerTools::form.select wire:model.live="fields.{{ $index }}.fake_type"
+                                                class="max-w-xs text-sm">
+                                                @foreach ($this->getAvailableFakerTypes() as $value => $label)
+                                                    <option value="{{ $value }}">{{ $label }}</option>
+                                                @endforeach
+                                            </x:developerTools::form.select>
+                                        </td>
+                                    </tr>
+                                @endif
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        @endif
 
         <div class="grid grid-cols-1 gap-5 mt-14">
 

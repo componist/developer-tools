@@ -36,6 +36,8 @@ class Model extends Component
 
     public bool $hasDeletedAt = false;
 
+    public bool $generateFactory = false;
+
     public function mount(): void
     {
         $this->getTables();
@@ -52,6 +54,41 @@ class Model extends Component
         }
 
         return view('developerTools::livewire.model')->layout('developerTools::layouts.package');
+    }
+
+    /**
+     * @return array<string, string>
+     */
+    public function getAvailableFakerTypes(): array
+    {
+        return [
+            'word' => 'Word',
+            'sentence' => 'Sentence',
+            'paragraph' => 'Paragraph',
+            'text' => 'Text (200 Zeichen)',
+            'email' => 'E-Mail (unique)',
+            'name' => 'Name',
+            'firstName' => 'Vorname',
+            'lastName' => 'Nachname',
+            'company' => 'Firma',
+            'randomNumber' => 'Zufallszahl',
+            'numberBetween' => 'Zahl 1–100',
+            'randomFloat' => 'Dezimalzahl',
+            'boolean' => 'Boolean',
+            'dateTime' => 'DateTime',
+            'date' => 'Datum',
+            'time' => 'Uhrzeit',
+            'uuid' => 'UUID',
+            'slug' => 'Slug',
+            'streetAddress' => 'Straße',
+            'city' => 'Stadt',
+            'countryCode' => 'Ländercode',
+            'imageSmall' => 'Bild 200x300 (Picsum)',
+            'imageLarge' => 'Bild 800x600 (Picsum)',
+            'array' => 'Leeres Array []',
+            'null' => 'null',
+            'skip' => '— nicht in Factory —',
+        ];
     }
 
     public function updatedTable(string $value): void
@@ -77,6 +114,7 @@ class Model extends Component
                 $temp[$key]['faker']['type'] = null;
                 $temp[$key]['faker']['params'] = null;
                 $temp[$key]['faker']['default'] = null;
+                $temp[$key]['fake_type'] = $this->getDefaultFakerType($value);
             }
             $this->fields = $temp;
 
@@ -166,14 +204,20 @@ class Model extends Component
         $this->stub = str_replace('[casts]', $castsString, $this->stub);
         $this->stub = str_replace('[table]', $this->createTablePropertyContent(), $this->stub);
 
-        if (File::put($path, $this->stub) !== false) {
-            $this->messageSuccess = true;
-            $this->message = 'Model erstellt: '.$path;
-            $this->model = $this->tableSelected();
-        } else {
+        if (File::put($path, $this->stub) === false) {
             $this->messageSuccess = false;
             $this->message = 'Model konnte nicht geschrieben werden: '.$path;
+
+            return;
         }
+
+        if ($this->generateFactory) {
+            $this->createFactoryFile($modelClass);
+        }
+
+        $this->messageSuccess = true;
+        $this->message = 'Model erstellt: '.$path.($this->generateFactory ? ' (Factory wurde ebenfalls generiert)' : '');
+        $this->model = $this->tableSelected();
     }
 
     private function getTables(): void
@@ -273,5 +317,192 @@ class Model extends Component
         }
 
         return "\n\tprotected \$table = '".addslashes($actualTable)."';";
+    }
+
+    private function createFactoryFile(string $modelClass): void
+    {
+        $factoryPath = database_path('factories/'.$modelClass.'Factory.php');
+        $dir = dirname($factoryPath);
+        if (! File::isDirectory($dir)) {
+            File::makeDirectory($dir, 0755, true);
+        }
+
+        $fieldsLines = [];
+        foreach ($this->fields as $field) {
+            $name = $field['Field'] ?? '';
+            if ($name === '' || in_array($name, ['id', 'created_at', 'updated_at', 'deleted_at'], true)) {
+                continue;
+            }
+            $fakeType = $field['fake_type'] ?? 'word';
+            if ($fakeType === 'skip') {
+                continue;
+            }
+            $expression = $this->getFakerExpression($fakeType, $field);
+            if ($expression !== null) {
+                $fieldsLines[] = "            '".$name."' => ".$expression.',';
+            }
+        }
+
+        $fieldsString = implode("\n", $fieldsLines);
+
+        $content = <<<PHP
+<?php
+
+namespace Database\Factories;
+
+use App\Models\\$modelClass;
+use Illuminate\\Database\\Eloquent\\Factories\\Factory;
+
+/**
+ * @extends Factory<$modelClass>
+ */
+class {$modelClass}Factory extends Factory
+{
+    protected \$model = $modelClass::class;
+
+    public function definition(): array
+    {
+        return [
+$fieldsString
+        ];
+    }
+}
+PHP;
+
+        File::put($factoryPath, $content);
+    }
+
+    /**
+     * Default Faker type based on column name and type.
+     *
+     * @param  array<string, mixed>  $field
+     */
+    private function getDefaultFakerType(array $field): string
+    {
+        $name = (string) ($field['Field'] ?? '');
+        $type = strtolower((string) ($field['Type'] ?? ''));
+
+        if (in_array($name, ['id', 'created_at', 'updated_at', 'deleted_at'], true)) {
+            return 'skip';
+        }
+
+        $nameLower = strtolower($name);
+
+        if (str_contains($nameLower, 'email')) {
+            return 'email';
+        }
+        if (str_contains($nameLower, 'first_name') || str_contains($nameLower, 'vorname')) {
+            return 'firstName';
+        }
+        if (str_contains($nameLower, 'last_name') || str_contains($nameLower, 'nachname')) {
+            return 'lastName';
+        }
+        if (str_contains($nameLower, 'name') || str_contains($nameLower, 'title')) {
+            return 'name';
+        }
+        if (str_contains($nameLower, 'company') || str_contains($nameLower, 'firma')) {
+            return 'company';
+        }
+        if (str_contains($nameLower, 'street') || str_contains($nameLower, 'strasse')) {
+            return 'streetAddress';
+        }
+        if (str_contains($nameLower, 'city') || str_contains($nameLower, 'stadt')) {
+            return 'city';
+        }
+        if (str_contains($nameLower, 'country') && str_contains($nameLower, 'code')) {
+            return 'countryCode';
+        }
+        if (str_contains($nameLower, 'uuid') || str_contains($nameLower, 'slug')) {
+            return $nameLower === 'slug' ? 'slug' : 'uuid';
+        }
+        if (str_contains($nameLower, 'image') || str_contains($nameLower, 'bild') || str_contains($nameLower, 'photo')) {
+            return 'imageSmall';
+        }
+        if (str_contains($type, 'int') && ! str_contains($type, 'tinyint(1)')) {
+            return 'randomNumber';
+        }
+        if (str_contains($type, 'decimal') || str_contains($type, 'double') || str_contains($type, 'float')) {
+            return 'randomFloat';
+        }
+        if (str_contains($type, 'text') || str_contains($type, 'longtext')) {
+            return 'text';
+        }
+        if (str_contains($type, 'varchar') || str_contains($type, 'char')) {
+            return 'word';
+        }
+        if (str_contains($type, 'date') || str_contains($type, 'time')) {
+            return str_contains($type, 'date') && ! str_contains($type, 'time') ? 'date' : 'dateTime';
+        }
+        if (str_contains($type, 'json')) {
+            return 'array';
+        }
+        if (str_contains($type, 'bool') || str_contains($type, 'tinyint(1)')) {
+            return 'boolean';
+        }
+
+        return 'word';
+    }
+
+    /**
+     * PHP expression for a Faker type. Null for skip.
+     *
+     * @param  array<string, mixed>  $field
+     */
+    private function getFakerExpression(string $fakeType, array $field): ?string
+    {
+        $nullable = (($field['Null'] ?? '') === 'YES');
+        $optional = $nullable ? 'fake()->optional(0.8)->' : 'fake()->';
+
+        $expressions = [
+            'word' => 'fake()->word()',
+            'sentence' => 'fake()->sentence()',
+            'paragraph' => 'fake()->paragraph()',
+            'text' => 'fake()->text(200)',
+            'email' => 'fake()->unique()->email()',
+            'name' => 'fake()->name()',
+            'firstName' => 'fake()->firstName()',
+            'lastName' => 'fake()->lastName()',
+            'company' => 'fake()->company()',
+            'randomNumber' => 'fake()->randomNumber()',
+            'numberBetween' => 'fake()->numberBetween(1, 100)',
+            'randomFloat' => 'fake()->randomFloat(2, 0, 1000)',
+            'boolean' => 'fake()->boolean()',
+            'dateTime' => 'fake()->dateTime()',
+            'date' => 'fake()->date()',
+            'time' => 'fake()->time()',
+            'uuid' => 'fake()->uuid()',
+            'slug' => 'fake()->slug()',
+            'streetAddress' => 'fake()->streetAddress()',
+            'city' => 'fake()->city()',
+            'countryCode' => 'fake()->countryCode()',
+            'imageSmall' => "'https://picsum.photos/200/300'",
+            'imageLarge' => "'https://picsum.photos/800/600'",
+            'array' => '[]',
+            'null' => 'null',
+        ];
+
+        if ($fakeType === 'skip') {
+            return null;
+        }
+        if ($fakeType === 'null') {
+            return 'null';
+        }
+        if (isset($expressions[$fakeType])) {
+            $expr = $expressions[$fakeType];
+            if (
+                $nullable
+                && $fakeType !== 'null'
+                && ! str_contains($expr, 'optional')
+                && str_starts_with($expr, 'fake()->')
+            ) {
+                $inner = str_replace('fake()->', '', $expr);
+
+                return 'fake()->optional(0.8)->'.$inner;
+            }
+
+            return $expr;
+        }
+
+        return 'fake()->word()';
     }
 }
