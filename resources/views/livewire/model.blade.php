@@ -42,11 +42,8 @@
 
                 <label class="inline-flex items-center gap-2">
                     <input type="checkbox" wire:model.live="enableSoftDeletes"
-                        @disabled(! $hasDeletedAt)
                         class="rounded border-slate-300 text-teal-600 focus:ring-teal-500">
-                    <span class="text-slate-700 dark:text-slate-200">
-                        SoftDeletes (benötigt <code>deleted_at</code>)
-                    </span>
+                    <span class="text-slate-700 dark:text-slate-200">SoftDeletes verwenden</span>
                 </label>
 
                 <label class="inline-flex items-center gap-2">
@@ -56,16 +53,16 @@
                 </label>
             </div>
 
-            @if (! $hasDeletedAt)
-                <p class="mt-1 text-xs text-slate-500 dark:text-slate-400">
-                    Hinweis: SoftDeletes wird nur aktiv, wenn die Tabelle eine <code>deleted_at</code>-Spalte besitzt.
+            @if ($enableSoftDeletes && ! $hasDeletedAt)
+                <p class="mt-1 text-xs text-amber-600 dark:text-amber-400">
+                    Hinweis: Tabelle hat keine <code>deleted_at</code>-Spalte. Spalte wird angelegt.
                 </p>
             @endif
         @endif
 
         @if (isset($fields) && count($fields) >= 1 && $generateFactory)
             <div class="mt-8">
-                <h2 class="mb-3 font-bold text-slate-800 dark:text-slate-100">Factory-Spalten konfigurieren</h2>
+                <h2 class="mb-3 text-lg font-bold text-slate-800 dark:text-slate-100">Factory-Spalten konfigurieren</h2>
                 <p class="mb-3 text-sm text-slate-600 dark:text-slate-400">
                     Pro Spalte den Faker-Typ wählen. Pflichtfelder (Null: NO) werden angezeigt; bei nullable Spalten kann optional <code>null</code> gesetzt werden.
                 </p>
@@ -117,7 +114,7 @@
 
             @if (isset($fields) && count($fields) >= 1)
                 <div>
-                    <h2 class="mb-3 font-bold">Protected $fillable</h2>
+                    <h2 class="mb-3 text-lg font-bold text-slate-800 dark:text-slate-100">Protected $fillable</h2>
                     <x:developerTools::block>
                         <pre data-enlighter-language="php">protected $fillable = [
 @php
@@ -131,7 +128,7 @@
                 </div>
 
                 <div>
-                    <h2 class="mb-3 font-bold text-slate-700 dark:text-slate-300">Protected $casts</h2>
+                    <h2 class="mb-3 text-lg font-bold text-slate-800 dark:text-slate-100">Protected $casts</h2>
                     <x:developerTools::block>
                         <pre data-enlighter-language="php">/**
 * The attributes that should be cast to native types.

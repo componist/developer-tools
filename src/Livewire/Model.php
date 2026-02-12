@@ -30,7 +30,7 @@ class Model extends Component
 
     public bool $useHasFactory = true;
 
-    public bool $enableSoftDeletes = true;
+    public bool $enableSoftDeletes = false;
 
     public bool $generateCasts = true;
 
@@ -122,9 +122,13 @@ class Model extends Component
             foreach ($this->fields as $field) {
                 if (($field['Field'] ?? '') === 'deleted_at') {
                     $this->hasDeletedAt = true;
+                    $this->enableSoftDeletes = true;
 
                     break;
                 }
+            }
+            if (! $this->hasDeletedAt) {
+                $this->enableSoftDeletes = false;
             }
         }
     }
@@ -172,7 +176,7 @@ class Model extends Component
         $this->stub = File::get($stubPath);
         $this->stub = str_replace('[modelClass]', $modelClass, $this->stub);
 
-        $useSoftDeletes = $this->enableSoftDeletes && $this->hasDeletedAt;
+        $useSoftDeletes = $this->enableSoftDeletes;
 
         $useHasFactoryImport = $this->useHasFactory
             ? "use Illuminate\\Database\\Eloquent\\Factories\\HasFactory;\n"
