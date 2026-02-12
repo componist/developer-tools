@@ -1,6 +1,6 @@
 <?php
 
-namespace Componist\Helper\Class;
+namespace Componist\DeveloperTools\Class;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Cookie\CookieJar;

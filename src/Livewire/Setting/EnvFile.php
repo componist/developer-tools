@@ -1,6 +1,6 @@
 <?php
 
-namespace Componist\Helper\Livewire\Setting;
+namespace Componist\DeveloperTools\Livewire\Setting;
 
 use Illuminate\Support\Facades\File;
 use Livewire\Component;
@@ -22,6 +22,6 @@ class EnvFile extends Component
 
     public function render()
     {
-        return view('miniHelper::livewire.setting.env-file')->layout('miniHelper::layouts.package');
+        return view('developerTools::livewire.setting.env-file')->layout('developerTools::layouts.package');
     }
 }

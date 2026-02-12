@@ -25,17 +25,17 @@
                 <p class="mb-2 ml-2 text-2xl font-bold uppercase text-slate-500 dark:text-slate-400 mt-14">{{ $key }}</p>
             @endif
 
-            <x:miniHelper::block>
+            <x:developerTools::block>
                 @foreach ($group as $artisan)
-                    <x:miniHelper::item>
+                    <x:developerTools::item>
                         <button type="button"
                             class="block px-5 py-1 text-white bg-teal-500 rounded-full shadow-sm hover:bg-teal-600"
                             @click.prevent="navigator.clipboard.writeText('{{ $artisan['name'] }}'), showMsg = true, setTimeout(() => showMsg = false, 1000)">{{ $artisan['name'] }}</button>
 
                         <p class="text-slate-600 dark:text-slate-400">{{ $artisan['description'] }}</p>
-                    </x:miniHelper::item>
+                    </x:developerTools::item>
                 @endforeach
-            </x:miniHelper::block>
+            </x:developerTools::block>
         @endforeach
     </div>
 </div>

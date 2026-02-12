@@ -1,6 +1,6 @@
 <?php
 
-namespace Componist\Helper\Livewire\Artisan;
+namespace Componist\DeveloperTools\Livewire\Artisan;
 
 use Illuminate\Support\Facades\Artisan;
 use Livewire\Component;
@@ -29,6 +29,6 @@ class Liste extends Component
         $content = $commandListe;
         // dump($content);
 
-        return view('miniHelper::livewire.artisan.liste', compact('content'))->layout('miniHelper::layouts.package');
+        return view('developerTools::livewire.artisan.liste', compact('content'))->layout('developerTools::layouts.package');
     }
 }

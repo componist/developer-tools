@@ -1,6 +1,6 @@
 <?php
 
-namespace Componist\Helper\Livewire\Create;
+namespace Componist\DeveloperTools\Livewire\Create;
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
@@ -31,7 +31,7 @@ class Migration extends Component
 
     public function render(): View
     {
-        return view('miniHelper::livewire.create.migration')->layout('miniHelper::layouts.package');
+        return view('developerTools::livewire.create.migration')->layout('developerTools::layouts.package');
     }
 
     public function createFile(): void

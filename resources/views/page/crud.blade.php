@@ -1,4 +1,4 @@
-<x:miniHelper::layouts.package>
+<x:developerTools::layouts.package>
     <div>
         <div class="container px-3 mx-auto ">
             <div class="grid grid-cols-1 gap-7">
@@ -108,4 +108,4 @@ class UpdateTest extends TestCase
             });
         </script>
     </div>
-</x:miniHelper::layouts.package>
+</x:developerTools::layouts.package>

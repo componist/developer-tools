@@ -12,7 +12,7 @@
         ">
             <div class="mb-4">
                 <div class="relative">
-                    <x:miniHelper::form.input type="text" wire:model.live='baseUrl' placeholder="{{ url('/') }}"
+                    <x:developerTools::form.input type="text" wire:model.live='baseUrl' placeholder="{{ url('/') }}"
                         class="text-teal-500" />
                     @if ($baseUrl === null || empty($baseUrl))
                         <button type="button" class="absolute w-5 h-5 top-2 right-4 text-slate-300 dark:text-slate-500 hover:text-teal-500 dark:hover:text-teal-400"
@@ -62,7 +62,7 @@
                 @endif
             </div>
 
-            <x:miniHelper::block>
+            <x:developerTools::block>
                 <table class="w-full">
                     <thead>
                         <tr class="bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">
@@ -101,7 +101,7 @@
                         @endforeach
                     </tbody>
                 </table>
-            </x:miniHelper::block>
+            </x:developerTools::block>
         </div>
     </div>
 </div>

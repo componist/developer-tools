@@ -1,7 +1,7 @@
 <div>
     <div class="container mx-auto">
 
-        <x:miniHelper::block>
+        <x:developerTools::block>
             <table class="w-full border border-slate-300 dark:border-slate-600 border-collapse">
                 <tr class="sticky top-0 text-sm font-bold text-white uppercase bg-slate-600 dark:bg-slate-700">
                     <td class="px-3 py-2 border border-slate-300 dark:border-slate-600 border-collapse text-nowrap"></td>
@@ -22,7 +22,7 @@
                     @endforeach
                 </tbody>
             </table>
-        </x:miniHelper::block>
+        </x:developerTools::block>
 
         <div class="flex items-center gap-3 mt-7">
             <button type="button" @click.prevent="$wire.clearTables"

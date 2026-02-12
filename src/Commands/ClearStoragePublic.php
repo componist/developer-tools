@@ -1,6 +1,6 @@
 <?php
 
-namespace Componist\Helper\Commands;
+namespace Componist\DeveloperTools\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\File;

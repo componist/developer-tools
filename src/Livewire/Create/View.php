@@ -1,6 +1,6 @@
 <?php
 
-namespace Componist\Helper\Livewire\Create;
+namespace Componist\DeveloperTools\Livewire\Create;
 
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
@@ -22,7 +22,7 @@ class View extends Component
 
     public function render()
     {
-        return view('miniHelper::livewire.create.view')->layout('miniHelper::layouts.package');
+        return view('developerTools::livewire.create.view')->layout('developerTools::layouts.package');
     }
 
     public function getTable(string $table): void

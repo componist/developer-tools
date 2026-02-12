@@ -1,8 +1,8 @@
 <?php
 
-namespace Componist\Helper\Livewire\Crawler;
+namespace Componist\DeveloperTools\Livewire\Crawler;
 
-use Componist\Helper\Class\JsonCrawler;
+use Componist\DeveloperTools\Class\JsonCrawler;
 use Livewire\Component;
 
 class RoutesJson extends Component
@@ -49,7 +49,7 @@ class RoutesJson extends Component
             'running' => $this->running,
         ];
 
-        return view('miniHelper::livewire.crawler.routes-json', compact('content'))->layout('miniHelper::layouts.package');
+        return view('developerTools::livewire.crawler.routes-json', compact('content'))->layout('developerTools::layouts.package');
     }
 
     public function clearJonsFile()
@@ -60,7 +60,7 @@ class RoutesJson extends Component
 
     public function generateSitemap()
     {
-        $crawler = new \Componist\Helper\Class\JsonCrawler;
+        $crawler = new \Componist\DeveloperTools\Class\JsonCrawler;
         $data = $crawler->getData();
 
         // Nur URLs mit Status 200

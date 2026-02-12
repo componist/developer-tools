@@ -10,7 +10,7 @@
     })->values()->all();
 @endphp
 
-<x:miniHelper::layouts.package>
+<x:developerTools::layouts.package>
     <div
         x-data="{
             routes: @js($routesForJs),
@@ -70,4 +70,4 @@
             </table>
         </div>
     </div>
-</x:miniHelper::layouts.package>
+</x:developerTools::layouts.package>

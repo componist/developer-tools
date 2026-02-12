@@ -1,6 +1,6 @@
 <?php
 
-namespace Componist\Helper\Livewire\Setting;
+namespace Componist\DeveloperTools\Livewire\Setting;
 
 use Illuminate\Support\Facades\File;
 use Livewire\Component;
@@ -146,7 +146,7 @@ class LogFile extends Component
 
     public function render()
     {
-        return view('miniHelper::livewire.setting.log-file')->layout('miniHelper::layouts.package');
+        return view('developerTools::livewire.setting.log-file')->layout('developerTools::layouts.package');
     }
 }
 

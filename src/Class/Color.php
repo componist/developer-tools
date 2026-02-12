@@ -1,6 +1,6 @@
 <?php
 
-namespace Componist\Helper\Class;
+namespace Componist\DeveloperTools\Class;
 
 abstract class Color
 {

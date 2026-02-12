@@ -1,4 +1,4 @@
-<x:miniHelper::layouts.package>
+<x:developerTools::layouts.package>
     <div>
         <div class="container px-3 mx-auto ">
             <div class="grid grid-cols-1 gap-5">
@@ -144,4 +144,4 @@ class ArticleController extends Controller
         </div>
 
     </div>
-</x:miniHelper::layouts.package>
+</x:developerTools::layouts.package>

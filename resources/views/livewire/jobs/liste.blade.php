@@ -1,6 +1,6 @@
 <div>
     <div class="container mx-auto">
-        <x:miniHelper::block class="">
+        <x:developerTools::block class="">
             <div class="grid grid-cols-1 gap-5">
                 @foreach ($content as $job)
                     <div class="p-5 rounded-md bg-slate-100 dark:bg-slate-700 gap-7 text-slate-700 dark:text-slate-300">
@@ -18,6 +18,6 @@
                     </div>
                 @endforeach
             </div>
-        </x:miniHelper::block>
+        </x:developerTools::block>
     </div>
 </div>

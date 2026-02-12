@@ -1,6 +1,6 @@
 <?php
 
-namespace Componist\Helper\Livewire\Test;
+namespace Componist\DeveloperTools\Livewire\Test;
 
 use Illuminate\Support\Facades\Route;
 use Livewire\Component;
@@ -126,6 +126,6 @@ class Routes extends Component
 
     public function render()
     {
-        return view('miniHelper::livewire.test.routes')->layout('miniHelper::layouts.package');
+        return view('developerTools::livewire.test.routes')->layout('developerTools::layouts.package');
     }
 }

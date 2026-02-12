@@ -1,5 +1,5 @@
 {
-    "name": "componist/helper",
+    "name": "componist/developer-tools",
     "description": "....coming soon",
     "keywords": [],
     "homepage": "",
@@ -19,13 +19,13 @@
     "require-dev": {},
     "autoload": {
         "psr-4": {
-            "Componist\\Helper\\": "src/"
+            "Componist\\DeveloperTools\\": "src/"
         }
     },
     "extra": {
         "laravel": {
             "providers": [
-                "Componist\\Helper\\HelperServiceProvider"
+                "Componist\\DeveloperTools\\DeveloperToolsServiceProvider"
             ]
         }
     },

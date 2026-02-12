@@ -24,7 +24,7 @@
     <meta name="msapplication-TileImage" content="{{ asset('favicon/ms-icon-144x144.png') }}">
     <meta name="theme-color" content="#ffffff">
 
-    <title>Mini Helper - Laravel</title>
+    <title>Developer Tools - Laravel</title>
 
     @livewireStyles
 
@@ -83,7 +83,7 @@
             class="fixed top-0 bottom-0 px-5 overflow-y-auto transition-all duration-300 ease-linear bg-white dark:bg-slate-800 w-72 py-7">
             <div class="pb-3 border-b border-gray-200 dark:border-slate-600">
                 <div class="flex items-center gap-3">
-                    <x:miniHelper::logo class="text-white rounded-md w-12 h-12 bg-[#00BBA7]" />
+                    <x:developerTools::logo class="text-white rounded-md w-12 h-12 bg-[#00BBA7]" />
                     <h1 class="text-2xl font-bold text-center text-slate-800 dark:text-slate-100">Componist</h1>
                 </div>
             </div>
@@ -118,60 +118,60 @@
                             href="">Finance</a>
                     </li> --}}
                     <li>
-                        <a class="transition-all duration-200 ease-linear hover:text-teal-500 dark:hover:text-teal-400 {{ request()->routeIs('componist.mini-helper.model') ? 'text-teal-500 dark:text-teal-400' : 'text-slate-600 dark:text-slate-400' }}"
-                            href="{{ route('componist.mini-helper.model') }}">Model</a>
+                        <a class="transition-all duration-200 ease-linear hover:text-teal-500 dark:hover:text-teal-400 {{ request()->routeIs('componist.developer-tools.model') ? 'text-teal-500 dark:text-teal-400' : 'text-slate-600 dark:text-slate-400' }}"
+                            href="{{ route('componist.developer-tools.model') }}">Model</a>
                     </li>
 
                     <li>
-                        <a class="transition-all duration-200 ease-linear hover:text-teal-500 dark:hover:text-teal-400 {{ request()->routeIs('componist.mini-helper.validation') ? 'text-teal-500 dark:text-teal-400' : 'text-slate-600 dark:text-slate-400' }}"
-                            href="{{ route('componist.mini-helper.validation') }}">Validation</a>
+                        <a class="transition-all duration-200 ease-linear hover:text-teal-500 dark:hover:text-teal-400 {{ request()->routeIs('componist.developer-tools.validation') ? 'text-teal-500 dark:text-teal-400' : 'text-slate-600 dark:text-slate-400' }}"
+                            href="{{ route('componist.developer-tools.validation') }}">Validation</a>
                     </li>
                     <li>
-                        <a class="transition-all duration-200 ease-linear hover:text-teal-500 dark:hover:text-teal-400 {{ request()->routeIs('componist.mini-helper.search.string') ? 'text-teal-500 dark:text-teal-400' : 'text-slate-600 dark:text-slate-400' }}"
-                            href="{{ route('componist.mini-helper.search.string') }}">Search
+                        <a class="transition-all duration-200 ease-linear hover:text-teal-500 dark:hover:text-teal-400 {{ request()->routeIs('componist.developer-tools.search.string') ? 'text-teal-500 dark:text-teal-400' : 'text-slate-600 dark:text-slate-400' }}"
+                            href="{{ route('componist.developer-tools.search.string') }}">Search
                             String</a>
                     </li>
 
                     <li>
-                        <a class="transition-all duration-200 ease-linear hover:text-teal-500 dark:hover:text-teal-400 {{ request()->routeIs('componist.mini-helper.create.migration') ? 'text-teal-500 dark:text-teal-400' : 'text-slate-600 dark:text-slate-400' }}"
-                            href="{{ route('componist.mini-helper.create.migration') }}">Create
+                        <a class="transition-all duration-200 ease-linear hover:text-teal-500 dark:hover:text-teal-400 {{ request()->routeIs('componist.developer-tools.create.migration') ? 'text-teal-500 dark:text-teal-400' : 'text-slate-600 dark:text-slate-400' }}"
+                            href="{{ route('componist.developer-tools.create.migration') }}">Create
                             Migration</a>
                     </li>
 
                     <li>
-                        <a class="transition-all duration-200 ease-linear hover:text-teal-500 dark:hover:text-teal-400 {{ request()->routeIs('componist.mini-helper.create.view') ? 'text-teal-500 dark:text-teal-400' : 'text-slate-600 dark:text-slate-400' }}"
-                            href="{{ route('componist.mini-helper.create.view') }}">Create View</a>
+                        <a class="transition-all duration-200 ease-linear hover:text-teal-500 dark:hover:text-teal-400 {{ request()->routeIs('componist.developer-tools.create.view') ? 'text-teal-500 dark:text-teal-400' : 'text-slate-600 dark:text-slate-400' }}"
+                            href="{{ route('componist.developer-tools.create.view') }}">Create View</a>
                     </li>
 
                     <li>
-                        <a class="transition-all duration-200 ease-linear hover:text-teal-500 dark:hover:text-teal-400 {{ request()->routeIs('componist.mini-helper.database.schema') ? 'text-teal-500 dark:text-teal-400' : 'text-slate-600 dark:text-slate-400' }}"
-                            href="{{ route('componist.mini-helper.database.schema') }}">Database
+                        <a class="transition-all duration-200 ease-linear hover:text-teal-500 dark:hover:text-teal-400 {{ request()->routeIs('componist.developer-tools.database.schema') ? 'text-teal-500 dark:text-teal-400' : 'text-slate-600 dark:text-slate-400' }}"
+                            href="{{ route('componist.developer-tools.database.schema') }}">Database
                             Schema</a>
                     </li>
 
                     <li>
-                        <a class="transition-all duration-200 ease-linear hover:text-teal-500 dark:hover:text-teal-400 {{ request()->routeIs('componist.mini-helper.database.tools') ? 'text-teal-500 dark:text-teal-400' : 'text-slate-600 dark:text-slate-400' }}"
-                            href="{{ route('componist.mini-helper.database.tools') }}">Database Tools</a>
+                        <a class="transition-all duration-200 ease-linear hover:text-teal-500 dark:hover:text-teal-400 {{ request()->routeIs('componist.developer-tools.database.tools') ? 'text-teal-500 dark:text-teal-400' : 'text-slate-600 dark:text-slate-400' }}"
+                            href="{{ route('componist.developer-tools.database.tools') }}">Database Tools</a>
                     </li>
 
                     <li>
-                        <a class="transition-all duration-200 ease-linear hover:text-teal-500 dark:hover:text-teal-400 {{ request()->routeIs('componist.mini-helper.routes') ? 'text-teal-500 dark:text-teal-400' : 'text-slate-600 dark:text-slate-400' }}"
-                            href="{{ route('componist.mini-helper.routes') }}">Route Liste</a>
+                        <a class="transition-all duration-200 ease-linear hover:text-teal-500 dark:hover:text-teal-400 {{ request()->routeIs('componist.developer-tools.routes') ? 'text-teal-500 dark:text-teal-400' : 'text-slate-600 dark:text-slate-400' }}"
+                            href="{{ route('componist.developer-tools.routes') }}">Route Liste</a>
                     </li>
 
                     <li>
-                        <a class="transition-all duration-200 ease-linear hover:text-teal-500 dark:hover:text-teal-400 {{ request()->routeIs('componist.mini-helper.artisan.list') ? 'text-teal-500 dark:text-teal-400' : 'text-slate-600 dark:text-slate-400' }}"
-                            href="{{ route('componist.mini-helper.artisan.list') }}">Artisan Liste</a>
+                        <a class="transition-all duration-200 ease-linear hover:text-teal-500 dark:hover:text-teal-400 {{ request()->routeIs('componist.developer-tools.artisan.list') ? 'text-teal-500 dark:text-teal-400' : 'text-slate-600 dark:text-slate-400' }}"
+                            href="{{ route('componist.developer-tools.artisan.list') }}">Artisan Liste</a>
                     </li>
 
                     <li>
-                        <a class="transition-all duration-200 ease-linear hover:text-teal-500 dark:hover:text-teal-400 {{ request()->routeIs('componist.mini-helper.job.liste') ? 'text-teal-500 dark:text-teal-400' : 'text-slate-600 dark:text-slate-400' }}"
-                            href="{{ route('componist.mini-helper.job.liste') }}">Job Liste</a>
+                        <a class="transition-all duration-200 ease-linear hover:text-teal-500 dark:hover:text-teal-400 {{ request()->routeIs('componist.developer-tools.job.liste') ? 'text-teal-500 dark:text-teal-400' : 'text-slate-600 dark:text-slate-400' }}"
+                            href="{{ route('componist.developer-tools.job.liste') }}">Job Liste</a>
                     </li>
 
                     <li>
-                        <a class="transition-all duration-200 ease-linear hover:text-teal-500 dark:hover:text-teal-400 {{ request()->routeIs('componist.mini-helper.root.icons') ? 'text-teal-500 dark:text-teal-400' : 'text-slate-600 dark:text-slate-400' }}"
-                            href="{{ route('componist.mini-helper.root.icons') }}">Root Icons</a>
+                        <a class="transition-all duration-200 ease-linear hover:text-teal-500 dark:hover:text-teal-400 {{ request()->routeIs('componist.developer-tools.root.icons') ? 'text-teal-500 dark:text-teal-400' : 'text-slate-600 dark:text-slate-400' }}"
+                            href="{{ route('componist.developer-tools.root.icons') }}">Root Icons</a>
                     </li>
 
 
@@ -180,32 +180,32 @@
                     <p class="mb-3 text-base text-teal-500 uppercase mt-7">Document</p>
                     <hr class="border-gray-200 dark:border-slate-600" />
                     <li>
-                        <a class="transition-all duration-200 ease-linear hover:text-teal-500 dark:hover:text-teal-400 {{ request()->routeIs('componist.mini-helper.crud') ? 'text-teal-500 dark:text-teal-400' : 'text-slate-600 dark:text-slate-400' }}"
-                            href="{{ route('componist.mini-helper.crud') }}">CRUD</a>
+                        <a class="transition-all duration-200 ease-linear hover:text-teal-500 dark:hover:text-teal-400 {{ request()->routeIs('componist.developer-tools.crud') ? 'text-teal-500 dark:text-teal-400' : 'text-slate-600 dark:text-slate-400' }}"
+                            href="{{ route('componist.developer-tools.crud') }}">CRUD</a>
                     </li>
                     <li>
-                        <a class="transition-all duration-200 ease-linear hover:text-teal-500 dark:hover:text-teal-400 {{ request()->routeIs('componist.mini-helper.rest-api') ? 'text-teal-500 dark:text-teal-400' : 'text-slate-600 dark:text-slate-400' }}"
-                            href="{{ route('componist.mini-helper.rest-api') }}">REST API</a>
+                        <a class="transition-all duration-200 ease-linear hover:text-teal-500 dark:hover:text-teal-400 {{ request()->routeIs('componist.developer-tools.rest-api') ? 'text-teal-500 dark:text-teal-400' : 'text-slate-600 dark:text-slate-400' }}"
+                            href="{{ route('componist.developer-tools.rest-api') }}">REST API</a>
                     </li>
 
                     <p class="mb-3 text-base text-teal-500 uppercase mt-7">Test</p>
                     <hr class="border-gray-200 dark:border-slate-600" />
                     <li>
-                        <a class="transition-all duration-200 ease-linear hover:text-teal-500 dark:hover:text-teal-400 {{ request()->routeIs('componist.mini-helper.pest-examples') ? 'text-teal-500 dark:text-teal-400' : 'text-slate-600 dark:text-slate-400' }}"
-                            href="{{ route('componist.mini-helper.pest-examples') }}">Pest Examples</a>
+                        <a class="transition-all duration-200 ease-linear hover:text-teal-500 dark:hover:text-teal-400 {{ request()->routeIs('componist.developer-tools.pest-examples') ? 'text-teal-500 dark:text-teal-400' : 'text-slate-600 dark:text-slate-400' }}"
+                            href="{{ route('componist.developer-tools.pest-examples') }}">Pest Examples</a>
                     </li>
 
                     <li>
-                        <a class="transition-all duration-200 ease-linear hover:text-teal-500 dark:hover:text-teal-400 {{ request()->routeIs('componist.mini-helper.test.routes') ? 'text-teal-500 dark:text-teal-400' : 'text-slate-600 dark:text-slate-400' }}"
-                            href="{{ route('componist.mini-helper.test.routes') }}">Test Routes</a>
+                        <a class="transition-all duration-200 ease-linear hover:text-teal-500 dark:hover:text-teal-400 {{ request()->routeIs('componist.developer-tools.test.routes') ? 'text-teal-500 dark:text-teal-400' : 'text-slate-600 dark:text-slate-400' }}"
+                            href="{{ route('componist.developer-tools.test.routes') }}">Test Routes</a>
                     </li>
 
 
                     <p class="mb-3 text-base text-teal-500 uppercase mt-7">Crawler</p>
                     <hr class="border-gray-200 dark:border-slate-600" />
                     <li>
-                        <a class="transition-all duration-200 ease-linear hover:text-teal-500 dark:hover:text-teal-400 {{ request()->routeIs('componist.mini-helper.crawler.route.json') ? 'text-teal-500 dark:text-teal-400' : 'text-slate-600 dark:text-slate-400' }}"
-                            href="{{ route('componist.mini-helper.crawler.route.json') }}">Frontend
+                        <a class="transition-all duration-200 ease-linear hover:text-teal-500 dark:hover:text-teal-400 {{ request()->routeIs('componist.developer-tools.crawler.route.json') ? 'text-teal-500 dark:text-teal-400' : 'text-slate-600 dark:text-slate-400' }}"
+                            href="{{ route('componist.developer-tools.crawler.route.json') }}">Frontend
                             Route Crawler
                             Json</a>
                     </li>
@@ -213,12 +213,12 @@
                     <p class="mb-3 text-base text-teal-500 uppercase mt-7">Setting</p>
                     <hr class="border-gray-200 dark:border-slate-600" />
                     <li>
-                        <a class="transition-all duration-200 ease-linear hover:text-teal-500 dark:hover:text-teal-400 {{ request()->routeIs('componist.mini-helper.setting.env') ? 'text-teal-500 dark:text-teal-400' : 'text-slate-600 dark:text-slate-400' }}"
-                            href="{{ route('componist.mini-helper.setting.env') }}">.ENV File</a>
+                        <a class="transition-all duration-200 ease-linear hover:text-teal-500 dark:hover:text-teal-400 {{ request()->routeIs('componist.developer-tools.setting.env') ? 'text-teal-500 dark:text-teal-400' : 'text-slate-600 dark:text-slate-400' }}"
+                            href="{{ route('componist.developer-tools.setting.env') }}">.ENV File</a>
                     </li>
                     <li>
-                        <a class="transition-all duration-200 ease-linear hover:text-teal-500 dark:hover:text-teal-400 {{ request()->routeIs('componist.mini-helper.setting.log') ? 'text-teal-500 dark:text-teal-400' : 'text-slate-600 dark:text-slate-400' }}"
-                            href="{{ route('componist.mini-helper.setting.log') }}">Laravel Log File</a>
+                        <a class="transition-all duration-200 ease-linear hover:text-teal-500 dark:hover:text-teal-400 {{ request()->routeIs('componist.developer-tools.setting.log') ? 'text-teal-500 dark:text-teal-400' : 'text-slate-600 dark:text-slate-400' }}"
+                            href="{{ route('componist.developer-tools.setting.log') }}">Laravel Log File</a>
                     </li>
 
                 </ul>

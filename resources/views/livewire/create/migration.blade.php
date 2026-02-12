@@ -2,19 +2,19 @@
     <div class="container mx-auto">
         <div class="grid grid-cols-1 gap-5 mb-14">
             <div>
-                <x:miniHelper::form.label>Table</x:miniHelper::form.label>
-                <x:miniHelper::form.select size="1" wire:model.live.debounce.500ms="table"
+                <x:developerTools::form.label>Table</x:developerTools::form.label>
+                <x:developerTools::form.select size="1" wire:model.live.debounce.500ms="table"
                     wire:change='getTable($event.target.value)'>
                     <option value=""></option>
                     @foreach ($table_list as $value)
                         <option value="{{ $value }}">{{ $value }}</option>
                     @endforeach
-                </x:miniHelper::form.select>
+                </x:developerTools::form.select>
             </div>
             <div class="flex items-end gap-5">
                 <div class="w-full">
-                    <x:miniHelper::form.label>API URL</x:miniHelper::form.label>
-                    <x:miniHelper::form.input type="text" wire:model.live='url' />
+                    <x:developerTools::form.label>API URL</x:developerTools::form.label>
+                    <x:developerTools::form.input type="text" wire:model.live='url' />
                 </div>
 
                 @if ($url)

@@ -1,4 +1,4 @@
-<x:miniHelper::layouts.package>
+<x:developerTools::layouts.package>
     <div>
         <div class="container px-3 mx-auto ">
             <div class="grid grid-cols-1 gap-7">
@@ -132,4 +132,4 @@ test('route stability', function () {
             </div>
         </div>
     </div>
-</x:miniHelper::layouts.package>
+</x:developerTools::layouts.package>

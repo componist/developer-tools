@@ -5,12 +5,12 @@
         <div class="flex items-end gap-5 mt-7">
 
             <div class="w-36">
-                <x:miniHelper::form.label>Package Prefix:</x:miniHelper::form.label>
-                <x:miniHelper::form.input type="text" wire:model.live='prefix' placeholder="core::" />
+                <x:developerTools::form.label>Package Prefix:</x:developerTools::form.label>
+                <x:developerTools::form.input type="text" wire:model.live='prefix' placeholder="core::" />
             </div>
             <div class="w-full">
-                <x:miniHelper::form.label>Path:</x:miniHelper::form.label>
-                <x:miniHelper::form.input type="text" wire:model.live='path' placeholder="{{ $path }}" />
+                <x:developerTools::form.label>Path:</x:developerTools::form.label>
+                <x:developerTools::form.input type="text" wire:model.live='path' placeholder="{{ $path }}" />
             </div>
 
             <button type="button" @click.prevent="$wire.scanIconPath()"

@@ -1,6 +1,6 @@
 <?php
 
-namespace Componist\Helper\Livewire\RootComponents;
+namespace Componist\DeveloperTools\Livewire\RootComponents;
 
 use Livewire\Component;
 
@@ -36,7 +36,7 @@ class Index extends Component
 
         // dump($this->iconListe);
 
-        return view('miniHelper::livewire.root-components.index', compact('content'))->layout('miniHelper::layouts.package');
+        return view('developerTools::livewire.root-components.index', compact('content'))->layout('developerTools::layouts.package');
     }
 
     public function scanIconPath(): void

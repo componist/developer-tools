@@ -2,7 +2,7 @@
     <div class="container mx-auto">
 
         <div class="flex gap-3 mb-7">
-            <x:miniHelper::form.input type="text" wire:model.live='search' placeholder="Search String" />
+            <x:developerTools::form.input type="text" wire:model.live='search' placeholder="Search String" />
 
             <button type="button" wire:click="searchInFiles"
                 class="px-5 py-2 text-white bg-blue-500 rounded-md hover:bg-blue-600">Suchen</button>
@@ -10,7 +10,7 @@
 
         @if (count($founds) >= 1)
             <p class="text-center mb-7 text-slate-600 dark:text-slate-400"><b>Result:</b> {{ count($founds) }}</p>
-            <x:miniHelper::block>
+            <x:developerTools::block>
                 <ul class="divide-y divide-gray-200 dark:divide-slate-600">
                     @foreach ($founds as $found)
                         <li x-data="{ open: false }" class="">
@@ -28,7 +28,7 @@
                         </li>
                     @endforeach
                 </ul>
-            </x:miniHelper::block>
+            </x:developerTools::block>
         @endif
 
     </div>

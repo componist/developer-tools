@@ -1,4 +1,4 @@
-# mini Helper
+# Componist Developer Tools
 
 - [x] show Modal fillable array , casts array
 - [x] show Validation settings from database  table
@@ -31,7 +31,7 @@ if (env('APP_DEBUG') === true) {
 
 
 ## install
-### #1. copy this folder in root/packages/componist
+### #1. copy this folder to root/packages/developer-tools
 
 
 ### #2. in your composer.json include to autoload -> psr-4
@@ -44,7 +44,7 @@ if (env('APP_DEBUG') === true) {
             "Database\\Factories\\": "database/factories/",
             "Database\\Seeders\\": "database/seeders/",
            
-            "Componist\\Helper\\": "packages/componist/helper/src",
+            "Componist\\DeveloperTools\\": "packages/developer-tools/src",
            
         }
     },
@@ -57,7 +57,7 @@ if (env('APP_DEBUG') === true) {
 ```php
 return [
     
-    Componist\Helper\HelperServiceProvider::class,
+    Componist\DeveloperTools\DeveloperToolsServiceProvider::class,
    
 ];
 
@@ -67,5 +67,7 @@ return [
 ### #4. show in url with 
 
 ```
-https://your-url/helper
+https://your-url/componist
+
+(URL-Prefix ist in der Config `config/developer-tools.php` unter `route_prefix` änderbar.)
 ```

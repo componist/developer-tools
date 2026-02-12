@@ -1,6 +1,6 @@
 <?php
 
-namespace Componist\Helper\Livewire\Jobs;
+namespace Componist\DeveloperTools\Livewire\Jobs;
 
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
@@ -38,7 +38,7 @@ class Liste extends Component
 
         $content = $jobClasses;
 
-        return view('miniHelper::livewire.jobs.liste', compact('content'))->layout('miniHelper::layouts.package');
+        return view('developerTools::livewire.jobs.liste', compact('content'))->layout('developerTools::layouts.package');
     }
 
     public function runJob(array $job)

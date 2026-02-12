@@ -1,6 +1,6 @@
 <?php
 
-namespace Componist\Helper\Livewire\Database;
+namespace Componist\DeveloperTools\Livewire\Database;
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
@@ -18,7 +18,7 @@ class Tools extends Component
     public function render()
     {
 
-        return view('miniHelper::livewire.database.tools')->layout('miniHelper::layouts.package');
+        return view('developerTools::livewire.database.tools')->layout('developerTools::layouts.package');
     }
 
     public function clearTables(): void

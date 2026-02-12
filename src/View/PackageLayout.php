@@ -1,6 +1,6 @@
 <?php
 
-namespace Componist\Helper\View;
+namespace Componist\DeveloperTools\View;
 
 use Illuminate\View\Component;
 use Illuminate\View\View;
@@ -12,6 +12,6 @@ class PackageLayout extends Component
      */
     public function render(): View
     {
-        return view('miniHelper::layouts.package');
+        return view('developerTools::layouts.package');
     }
 }

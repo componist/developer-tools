@@ -39,7 +39,7 @@
             
             <div class="space-y-4">
                 @foreach ($groupedRoutes as $groupName => $groupRoutes)
-                    <x:miniHelper::block>
+                    <x:developerTools::block>
                         <div class="mb-4">
                             <div class="bg-gray-100 px-4 py-2 font-semibold text-gray-700 uppercase text-sm border-b border-gray-200 rounded-t-lg flex items-center justify-between">
                                 <div>
@@ -203,7 +203,7 @@
                                 </table>
                             </div>
                         </div>
-                    </x:miniHelper::block>
+                    </x:developerTools::block>
                 @endforeach
             </div>
         </div>

@@ -1,6 +1,6 @@
 <?php
 
-namespace Componist\Helper\Livewire;
+namespace Componist\DeveloperTools\Livewire;
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
@@ -38,7 +38,7 @@ class Model extends Component
             $this->fillable = '';
         }
 
-        return view('miniHelper::livewire.model')->layout('miniHelper::layouts.package');
+        return view('developerTools::livewire.model')->layout('developerTools::layouts.package');
     }
 
     public function getTable(string $table): void

@@ -1,6 +1,6 @@
 <?php
 
-namespace Componist\Helper\Livewire;
+namespace Componist\DeveloperTools\Livewire;
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
@@ -27,7 +27,7 @@ class Validation extends Component
             $this->createValidateString();
         }
 
-        return view('miniHelper::livewire.validation')->layout('miniHelper::layouts.package');
+        return view('developerTools::livewire.validation')->layout('developerTools::layouts.package');
     }
 
     public function getTable(string $table): void

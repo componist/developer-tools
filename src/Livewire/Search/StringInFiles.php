@@ -1,6 +1,6 @@
 <?php
 
-namespace Componist\Helper\Livewire\Search;
+namespace Componist\DeveloperTools\Livewire\Search;
 
 use Exception;
 use Illuminate\View\View;
@@ -55,7 +55,7 @@ class StringInFiles extends Component
 
     public function render(): View
     {
-        return view('miniHelper::livewire.search.string-in-files')->layout('miniHelper::layouts.package');
+        return view('developerTools::livewire.search.string-in-files')->layout('developerTools::layouts.package');
     }
 
     public function searchInFiles(): void
