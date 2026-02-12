@@ -3,6 +3,7 @@
 namespace Componist\DeveloperTools\Livewire;
 
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
 use Illuminate\View\View;
 use Livewire\Component;
@@ -23,6 +24,18 @@ class Model extends Component
 
     public string $fillable = '';
 
+    public ?string $message = null;
+
+    public bool $messageSuccess = true;
+
+    public bool $useHasFactory = true;
+
+    public bool $enableSoftDeletes = true;
+
+    public bool $generateCasts = true;
+
+    public bool $hasDeletedAt = false;
+
     public function mount(): void
     {
         $this->getTables();
@@ -31,7 +44,7 @@ class Model extends Component
     public function render(): View
     {
         if ($this->table) {
-            $this->model = $this->tableSecelted();
+            $this->model = $this->tableSelected();
             $this->fillable = $this->createFillableArrayContent();
         } else {
             $this->model = [];
@@ -41,53 +54,141 @@ class Model extends Component
         return view('developerTools::livewire.model')->layout('developerTools::layouts.package');
     }
 
+    public function updatedTable(string $value): void
+    {
+        $this->getTable($value);
+    }
+
     public function getTable(string $table): void
     {
         if (! empty($table)) {
             $this->table = $table;
-            $temp = json_decode(json_encode(DB::select('SHOW COLUMNS FROM `'.$table.'` ')), true);
+            $temp = json_decode(json_encode(DB::select('SHOW COLUMNS FROM `'.$table.'`')), true);
+
+            if (! is_array($temp)) {
+                $this->fields = [];
+
+                return;
+            }
 
             foreach ($temp as $key => $value) {
                 $temp[$key]['checked'] = 0;
-                $temp[$key]['faker']['Field'] = $value['Field'];
+                $temp[$key]['faker']['Field'] = $value['Field'] ?? '';
                 $temp[$key]['faker']['type'] = null;
                 $temp[$key]['faker']['params'] = null;
                 $temp[$key]['faker']['default'] = null;
             }
             $this->fields = $temp;
+
+            $this->hasDeletedAt = false;
+            foreach ($this->fields as $field) {
+                if (($field['Field'] ?? '') === 'deleted_at') {
+                    $this->hasDeletedAt = true;
+
+                    break;
+                }
+            }
         }
     }
 
-    public function createModelFile()
+    public function createModelFile(): void
     {
-        $this->getStubContent();
-        dump($this->model);
+        $this->message = null;
 
-        $this->stub = str_replace('[modelClass]', $this->model['modelClass'], $this->stub);
-        $this->stub = str_replace('[fillable]', $this->fillable, $this->stub);
+        if (empty($this->table) || empty($this->model)) {
+            $this->messageSuccess = false;
+            $this->message = 'Bitte zuerst eine Tabelle auswählen.';
 
-        dd($this->stub);
-        // table wurde ausgewählt
-        // model file wurde nicht gefunden, kann erstellt werden
+            return;
+        }
 
+        if ($this->model['existsModel'] === true) {
+            $this->messageSuccess = false;
+            $this->message = 'Model existiert bereits: App\Models\\'.$this->model['modelClass'];
+
+            return;
+        }
+
+        $modelClass = $this->model['modelClass'];
+        if (! preg_match('/^[a-zA-Z_][a-zA-Z0-9_]*$/', $modelClass)) {
+            $this->messageSuccess = false;
+            $this->message = 'Ungültiger Klassenname.';
+
+            return;
+        }
+
+        $path = app_path('Models/'.$modelClass.'.php');
+        $dir = dirname($path);
+        if (! File::isDirectory($dir)) {
+            File::makeDirectory($dir, 0755, true);
+        }
+
+        $stubPath = __DIR__.'/../stub/create_model.stub';
+        if (! File::exists($stubPath)) {
+            $this->messageSuccess = false;
+            $this->message = 'Stub-Datei fehlt: '.$stubPath;
+
+            return;
+        }
+
+        $this->stub = File::get($stubPath);
+        $this->stub = str_replace('[modelClass]', $modelClass, $this->stub);
+
+        $useSoftDeletes = $this->enableSoftDeletes && $this->hasDeletedAt;
+
+        $useHasFactoryImport = $this->useHasFactory
+            ? "use Illuminate\\Database\\Eloquent\\Factories\\HasFactory;\n"
+            : '';
+
+        $useSoftDeletesImport = $useSoftDeletes
+            ? "use Illuminate\\Database\\Eloquent\\SoftDeletes;\n"
+            : '';
+
+        $traits = [];
+        if ($this->useHasFactory) {
+            $traits[] = 'HasFactory';
+        }
+        if ($useSoftDeletes) {
+            $traits[] = 'SoftDeletes';
+        }
+
+        $traitsString = $traits !== []
+            ? '    use '.implode(', ', $traits).';'
+            : '';
+
+        $this->stub = str_replace('[useHasFactoryImport]', $useHasFactoryImport, $this->stub);
+        $this->stub = str_replace('[useSoftDeletesImport]', $useSoftDeletesImport, $this->stub);
+        $this->stub = str_replace('[traits]', $traitsString, $this->stub);
+
+        $this->stub = str_replace('[fillable]', $this->createFillableArrayContent(), $this->stub);
+
+        $castsString = $this->generateCasts ? $this->createCastsArrayContent() : '';
+        $this->stub = str_replace('[casts]', $castsString, $this->stub);
+        $this->stub = str_replace('[table]', $this->createTablePropertyContent(), $this->stub);
+
+        if (File::put($path, $this->stub) !== false) {
+            $this->messageSuccess = true;
+            $this->message = 'Model erstellt: '.$path;
+            $this->model = $this->tableSelected();
+        } else {
+            $this->messageSuccess = false;
+            $this->message = 'Model konnte nicht geschrieben werden: '.$path;
+        }
     }
 
     private function getTables(): void
     {
+        $this->table_list = [];
         foreach (DB::select('SHOW TABLES') as $value) {
-
             $this->table_list[] = implode(',', json_decode(json_encode($value), true));
         }
     }
 
-    private function tableSecelted(): array
+    private function tableSelected(): array
     {
         $modelClass = Str::pascal(Str::singular($this->table));
-        $existsModel = false;
-
-        if (file_exists(app_path('Models/'.$modelClass.'.php'))) {
-            $existsModel = true;
-        }
+        $path = app_path('Models/'.$modelClass.'.php');
+        $existsModel = File::exists($path);
 
         return [
             'modelClass' => $modelClass,
@@ -95,33 +196,82 @@ class Model extends Component
         ];
     }
 
-    private function getStubContent(): void
+    private function createFillableArrayContent(): string
     {
-        $this->stub = file_get_contents(__DIR__.'../../stub/create_model.stub');
-    }
-
-    private function createFillableArrayContent()
-    {
-        $string = 'protected $fillable = [';
-
-        $count = 0;
-
+        $fillable = [];
         foreach ($this->fields as $field) {
-
-            $count++;
-
-            if ($field['Field'] != 'id') {
-
-                if (count($this->fields) == $count) {
-                    $string .= '"'.$field['Field'].'"';
-                } else {
-                    $string .= '"'.$field['Field'].'",';
-                }
-
+            $name = $field['Field'] ?? '';
+            if ($name !== '' && $name !== 'id') {
+                $fillable[] = '"'.$name.'"';
             }
         }
-        $string .= '];';
 
-        return $string;
+        return 'protected $fillable = ['.implode(', ', $fillable).'];';
+    }
+
+    private function createCastsArrayContent(): string
+    {
+        $lines = [];
+        foreach ($this->fields as $field) {
+            $name = $field['Field'] ?? '';
+            $type = $field['Type'] ?? '';
+            if ($name === '') {
+                continue;
+            }
+            $cast = $this->getCastType($type);
+            if ($cast !== null) {
+                $lines[] = "\t\t'".$name."' => '".$cast."',";
+            }
+        }
+        if ($lines === []) {
+            return '';
+        }
+
+        return "\n\t/**\n\t * The attributes that should be cast.\n\t *\n\t * @var array<string, string>\n\t */\n\tprotected \$casts = [\n".implode("\n", $lines)."\n\t];";
+    }
+
+    private function getCastType(string $type): ?string
+    {
+        $type = strtolower($type);
+        if (str_contains($type, 'int') || str_contains($type, 'bigint')) {
+            return 'integer';
+        }
+        if (str_contains($type, 'tinyint(1)') || $type === 'boolean') {
+            return 'boolean';
+        }
+        if (str_contains($type, 'varchar') || str_contains($type, 'char')) {
+            return 'string';
+        }
+        if (str_contains($type, 'text') || str_contains($type, 'longtext')) {
+            return 'string';
+        }
+        if (str_contains($type, 'double')) {
+            return 'double';
+        }
+        if (str_contains($type, 'float')) {
+            return 'float';
+        }
+        if (str_contains($type, 'decimal')) {
+            return 'decimal:2';
+        }
+        if (str_contains($type, 'timestamp') || str_contains($type, 'datetime') || str_contains($type, 'date')) {
+            return 'datetime';
+        }
+        if (str_contains($type, 'json')) {
+            return 'array';
+        }
+
+        return 'string';
+    }
+
+    private function createTablePropertyContent(): string
+    {
+        $expectedTable = Str::snake(Str::pluralStudly($this->model['modelClass'] ?? ''));
+        $actualTable = $this->table;
+        if ($actualTable === $expectedTable || $expectedTable === '') {
+            return '';
+        }
+
+        return "\n\tprotected \$table = '".addslashes($actualTable)."';";
     }
 }

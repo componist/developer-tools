@@ -1,10 +1,14 @@
 <div>
     <div class="container mx-auto">
+        @if ($message)
+            <div class="p-4 mb-4 rounded-md {{ $messageSuccess ? 'bg-teal-100 dark:bg-teal-900/30 text-teal-800 dark:text-teal-200' : 'bg-red-100 dark:bg-red-900/30 text-red-800 dark:text-red-200' }}">
+                {{ $message }}
+            </div>
+        @endif
         <div class="flex items-end justify-between gap-5">
             <div class="w-full">
                 <x:developerTools::form.label>Table</x:developerTools::form.label>
-                <x:developerTools::form.select size="1" wire:model.live.debounce.500ms="table"
-                    wire:change='getTable($event.target.value)'>
+                <x:developerTools::form.select size="1" wire:model.live.debounce.300ms="table">
                     <option value=""></option>
                     @foreach ($table_list as $value)
                         <option value="{{ $value }}">{{ $value }}</option>
@@ -21,6 +25,37 @@
                 @endif
             </div>
         </div>
+
+        @if ($table)
+            <div class="flex flex-wrap gap-4 mt-4 text-sm">
+                <label class="inline-flex items-center gap-2">
+                    <input type="checkbox" wire:model.live="useHasFactory"
+                        class="rounded border-slate-300 text-teal-600 focus:ring-teal-500">
+                    <span class="text-slate-700 dark:text-slate-200">HasFactory Trait verwenden</span>
+                </label>
+
+                <label class="inline-flex items-center gap-2">
+                    <input type="checkbox" wire:model.live="generateCasts"
+                        class="rounded border-slate-300 text-teal-600 focus:ring-teal-500">
+                    <span class="text-slate-700 dark:text-slate-200">$casts generieren</span>
+                </label>
+
+                <label class="inline-flex items-center gap-2">
+                    <input type="checkbox" wire:model.live="enableSoftDeletes"
+                        @disabled(! $hasDeletedAt)
+                        class="rounded border-slate-300 text-teal-600 focus:ring-teal-500">
+                    <span class="text-slate-700 dark:text-slate-200">
+                        SoftDeletes (benötigt <code>deleted_at</code>)
+                    </span>
+                </label>
+            </div>
+
+            @if (! $hasDeletedAt)
+                <p class="mt-1 text-xs text-slate-500 dark:text-slate-400">
+                    Hinweis: SoftDeletes wird nur aktiv, wenn die Tabelle eine <code>deleted_at</code>-Spalte besitzt.
+                </p>
+            @endif
+        @endif
         
 
         <div class="grid grid-cols-1 gap-5 mt-14">

@@ -2,15 +2,14 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+[useHasFactoryImport][useSoftDeletesImport]
 
 class [modelClass] extends Model
 {
-    use HasFactory;
+    [traits]
 
-
+    [table]
     [fillable]
-
     [casts]
 }
