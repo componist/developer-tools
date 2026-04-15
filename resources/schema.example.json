@@ -1,0 +1,26 @@
+{
+    "tables": [
+        {
+            "table": "users",
+            "fields": [
+                { "Field": "id", "Type": "bigint(20) unsigned", "Null": "NO", "Key": "PRI", "Default": null, "Extra": "auto_increment" },
+                { "Field": "name", "Type": "varchar(255)", "Null": "NO", "Key": "", "Default": null, "Extra": "" },
+                { "Field": "email", "Type": "varchar(255)", "Null": "NO", "Key": "UNI", "Default": null, "Extra": "" }
+            ],
+            "relations": [
+                { "target": "posts", "type": "hasMany", "foreign_key": "user_id" }
+            ]
+        },
+        {
+            "table": "posts",
+            "fields": [
+                { "Field": "id", "Type": "bigint(20) unsigned", "Null": "NO", "Key": "PRI", "Default": null, "Extra": "auto_increment" },
+                { "Field": "user_id", "Type": "bigint(20) unsigned", "Null": "NO", "Key": "MUL", "Default": null, "Extra": "" },
+                { "Field": "title", "Type": "varchar(255)", "Null": "NO", "Key": "", "Default": null, "Extra": "" }
+            ],
+            "relations": [
+                { "target": "users", "type": "belongsTo", "foreign_key": "user_id" }
+            ]
+        }
+    ]
+}
