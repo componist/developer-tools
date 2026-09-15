@@ -2,10 +2,13 @@
 
 namespace Componist\DeveloperTools\Livewire\RootComponents;
 
+use Componist\DeveloperTools\Infrastructure\AuthorizesDeveloperTools;
 use Livewire\Component;
 
 class Index extends Component
 {
+    use AuthorizesDeveloperTools;
+
     public string $path = '';
 
     public string $prefix = '';

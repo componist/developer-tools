@@ -2,7 +2,8 @@
 
 namespace Componist\DeveloperTools\Livewire;
 
-use Illuminate\Support\Facades\DB;
+use Componist\DeveloperTools\Infrastructure\AuthorizesDeveloperTools;
+use Componist\DeveloperTools\Infrastructure\DatabaseSchemaReader;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
 use Illuminate\View\View;
@@ -10,6 +11,8 @@ use Livewire\Component;
 
 class Model extends Component
 {
+    use AuthorizesDeveloperTools;
+
     /** @var array<mixed> */
     public array $table_list = [];
 
@@ -100,7 +103,7 @@ class Model extends Component
     {
         if (! empty($table)) {
             $this->table = $table;
-            $temp = json_decode(json_encode(DB::select('SHOW COLUMNS FROM `'.$table.'`')), true);
+            $temp = DatabaseSchemaReader::columns($table);
 
             if (! is_array($temp)) {
                 $this->fields = [];
@@ -226,10 +229,7 @@ class Model extends Component
 
     private function getTables(): void
     {
-        $this->table_list = [];
-        foreach (DB::select('SHOW TABLES') as $value) {
-            $this->table_list[] = implode(',', json_decode(json_encode($value), true));
-        }
+        $this->table_list = DatabaseSchemaReader::tableNames();
     }
 
     private function tableSelected(): array

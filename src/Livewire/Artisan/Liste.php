@@ -3,10 +3,13 @@
 namespace Componist\DeveloperTools\Livewire\Artisan;
 
 use Illuminate\Support\Facades\Artisan;
+use Componist\DeveloperTools\Infrastructure\AuthorizesDeveloperTools;
 use Livewire\Component;
 
 class Liste extends Component
 {
+    use AuthorizesDeveloperTools;
+
     public function render()
     {
         $commandListe = [];

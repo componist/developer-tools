@@ -3,10 +3,13 @@
 namespace Componist\DeveloperTools\Livewire\Crawler;
 
 use Componist\DeveloperTools\Class\JsonCrawler;
+use Componist\DeveloperTools\Infrastructure\AuthorizesDeveloperTools;
 use Livewire\Component;
 
 class RoutesJson extends Component
 {
+    use AuthorizesDeveloperTools;
+
     public $baseUrl;
 
     public $running = false;

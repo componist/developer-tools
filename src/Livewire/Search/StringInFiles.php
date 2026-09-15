@@ -4,10 +4,13 @@ namespace Componist\DeveloperTools\Livewire\Search;
 
 use Exception;
 use Illuminate\View\View;
+use Componist\DeveloperTools\Infrastructure\AuthorizesDeveloperTools;
 use Livewire\Component;
 
 class StringInFiles extends Component
 {
+    use AuthorizesDeveloperTools;
+
     public string $path = '';
 
     public ?string $search = null;

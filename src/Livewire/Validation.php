@@ -2,6 +2,8 @@
 
 namespace Componist\DeveloperTools\Livewire;
 
+use Componist\DeveloperTools\Infrastructure\AuthorizesDeveloperTools;
+use Componist\DeveloperTools\Infrastructure\DatabaseSchemaReader;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
@@ -10,6 +12,8 @@ use Livewire\Component;
 
 class Validation extends Component
 {
+    use AuthorizesDeveloperTools;
+
     /** @var array<int, string> */
     public array $table_list = [];
 
@@ -119,7 +123,7 @@ PHP;
         }
 
         $this->table = $table;
-        $temp = json_decode(json_encode(DB::select('SHOW COLUMNS FROM `'.$table.'`')), true);
+        $temp = DatabaseSchemaReader::columns($table);
 
         if (! is_array($temp)) {
             $this->fields = [];
@@ -143,13 +147,7 @@ PHP;
 
     private function getTables(): void
     {
-        $this->table_list = [];
-        foreach (DB::select('SHOW TABLES') as $value) {
-            $decoded = json_decode(json_encode($value), true);
-            if (is_array($decoded)) {
-                $this->table_list[] = implode(',', $decoded);
-            }
-        }
+        $this->table_list = DatabaseSchemaReader::tableNames();
     }
 
     public function createFormRequestFile(): void

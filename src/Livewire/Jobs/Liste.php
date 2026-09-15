@@ -4,10 +4,13 @@ namespace Componist\DeveloperTools\Livewire\Jobs;
 
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
+use Componist\DeveloperTools\Infrastructure\AuthorizesDeveloperTools;
 use Livewire\Component;
 
 class Liste extends Component
 {
+    use AuthorizesDeveloperTools;
+
     public function render()
     {
         $jobClasses = [];

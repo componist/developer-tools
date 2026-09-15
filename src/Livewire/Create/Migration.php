@@ -2,13 +2,16 @@
 
 namespace Componist\DeveloperTools\Livewire\Create;
 
-use Illuminate\Support\Facades\DB;
+use Componist\DeveloperTools\Infrastructure\AuthorizesDeveloperTools;
+use Componist\DeveloperTools\Infrastructure\DatabaseSchemaReader;
 use Illuminate\Support\Facades\Http;
 use Illuminate\View\View;
 use Livewire\Component;
 
 class Migration extends Component
 {
+    use AuthorizesDeveloperTools;
+
     public ?string $url = null;
 
     /** @var array<mixed> */
@@ -52,7 +55,7 @@ class Migration extends Component
 
             $this->setTableName();
 
-            $temp = json_decode(json_encode(DB::select('SHOW COLUMNS FROM `'.$this->table.'` ')), true);
+            $temp = DatabaseSchemaReader::columns($this->table);
 
             $this->database = $temp;
 
@@ -243,9 +246,7 @@ class Migration extends Component
 
     private function getTables(): void
     {
-        foreach (DB::select('SHOW TABLES') as $value) {
-            $this->table_list[] = implode(',', json_decode(json_encode($value), true));
-        }
+        $this->table_list = DatabaseSchemaReader::tableNames();
     }
 
     private function getStubContent(): void

@@ -2,11 +2,14 @@
 
 namespace Componist\DeveloperTools\Livewire\Create;
 
-use Illuminate\Support\Facades\DB;
+use Componist\DeveloperTools\Infrastructure\AuthorizesDeveloperTools;
+use Componist\DeveloperTools\Infrastructure\DatabaseSchemaReader;
 use Livewire\Component;
 
 class View extends Component
 {
+    use AuthorizesDeveloperTools;
+
     /** @var array<mixed> */
     public array $table_list = [];
 
@@ -32,7 +35,7 @@ class View extends Component
             $this->table = $table;
             $this->fields = [];
 
-            $temp = json_decode(json_encode(DB::select('SHOW COLUMNS FROM `'.$this->table.'` ')), true);
+            $temp = DatabaseSchemaReader::columns($this->table);
 
             foreach ($temp as $value) {
 
@@ -108,8 +111,6 @@ class View extends Component
 
     private function getTables(): void
     {
-        foreach (DB::select('SHOW TABLES') as $value) {
-            $this->table_list[] = implode(',', json_decode(json_encode($value), true));
-        }
+        $this->table_list = DatabaseSchemaReader::tableNames();
     }
 }

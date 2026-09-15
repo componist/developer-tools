@@ -15,6 +15,11 @@ return [
 
     'route_prefix' => 'componist',
 
+    'admin_user_ids' => array_values(array_filter(array_map(
+        static fn (string $id): int => (int) trim($id),
+        explode(',', (string) env('DEVELOPER_TOOLS_ADMIN_IDS', ''))
+    ))),
+
     /*
     |--------------------------------------------------------------------------
     | Components

@@ -1,19 +1,21 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Componist\DeveloperTools;
 
+use App\Models\User;
 use Componist\DeveloperTools\Commands\ClearStoragePublic;
 use Componist\DeveloperTools\Console\CreateCursorProjectRuleCommand;
 use Illuminate\Support\Facades\Blade;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 use Livewire\Livewire;
 
 class DeveloperToolsServiceProvider extends ServiceProvider
 {
-    /**
-     * Register services.
-     */
     public function register(): void
     {
         $this->mergeConfigFrom(__DIR__ . '/../config/developer-tools.php', 'developer-tools');
@@ -30,11 +32,26 @@ class DeveloperToolsServiceProvider extends ServiceProvider
         $this->loadViewsFrom(__DIR__ . '/../resources/views', 'developerTools');
     }
 
-    /**
-     * Bootstrap services.
-     */
     public function boot(): void
     {
+        Gate::define('manage-developer-tools', function (?User $user): bool {
+            if ($user === null) {
+                return false;
+            }
+
+            $adminIds = config('developer-tools.admin_user_ids', []);
+
+            if ($adminIds !== [] && in_array((int) $user->id, array_map('intval', $adminIds), true)) {
+                return true;
+            }
+
+            if (Schema::hasColumn('users', 'isAdmin') && (int) ($user->getAttribute('isAdmin') ?? 0) === 1) {
+                return true;
+            }
+
+            return false;
+        });
+
         if ($this->app->runningInConsole()) {
             $this->publishes([
                 __DIR__ . '/../config/developer-tools.php' => config_path('developer-tools.php'),
@@ -45,10 +62,7 @@ class DeveloperToolsServiceProvider extends ServiceProvider
             ], 'developer-tools-cursor-rule');
         }
 
-        // blade componente
         $this->bootBladeComponents();
-
-        // livewire componente
         $this->bootLivewireComponents();
     }
 

@@ -2,11 +2,14 @@
 
 namespace Componist\DeveloperTools\Livewire\Setting;
 
+use Componist\DeveloperTools\Infrastructure\AuthorizesDeveloperTools;
 use Illuminate\Support\Facades\File;
 use Livewire\Component;
 
 class LogFile extends Component
 {
+    use AuthorizesDeveloperTools;
+
     public string $path = '';
 
     public array $logs = [];

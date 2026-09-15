@@ -2,11 +2,14 @@
 
 namespace Componist\DeveloperTools\Livewire\Test;
 
+use Componist\DeveloperTools\Infrastructure\AuthorizesDeveloperTools;
 use Illuminate\Support\Facades\Route;
 use Livewire\Component;
 
 class Routes extends Component
 {
+    use AuthorizesDeveloperTools;
+
     public array $routes = [];
 
     public function mount()
