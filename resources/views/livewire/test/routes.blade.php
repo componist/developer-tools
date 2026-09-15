@@ -15,13 +15,13 @@
                         <span class="text-sm font-medium text-blue-900 dark:text-blue-300">
                             Teste Routes... (<span x-text="testedCount"></span>/<span x-text="totalCount"></span>)
                         </span>
-                        <span class="text-sm font-medium text-blue-900" x-text="progressPercent + '%'"></span>
+                        <span class="text-sm font-medium text-blue-900 dark:text-blue-300" x-text="progressPercent + '%'"></span>
                     </div>
                     <div class="w-full bg-blue-200 dark:bg-blue-800 rounded-full h-2.5 mb-2">
                         <div class="bg-blue-600 h-2.5 rounded-full transition-all duration-300"
                             :style="`width: ${progressPercent}%`"></div>
                     </div>
-                    <div x-show="currentTestingRoute" class="text-xs text-gray-600 dark:text-slate-400 font-mono">
+                    <div x-show="currentTestingRoute" class="text-xs text-slate-600 dark:text-slate-400 font-mono">
                         <span class="inline-flex items-center gap-1">
                             <svg class="animate-spin h-3 w-3 text-blue-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                                 <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
@@ -41,10 +41,10 @@
                 @foreach ($groupedRoutes as $groupName => $groupRoutes)
                     <x:developerTools::block>
                         <div class="mb-4">
-                            <div class="bg-gray-100 px-4 py-2 font-semibold text-gray-700 uppercase text-sm border-b border-gray-200 rounded-t-lg flex items-center justify-between">
+                            <div class="bg-slate-100 dark:bg-slate-700 px-4 py-2 font-semibold text-slate-700 dark:text-slate-200 uppercase text-sm border-b border-slate-200 dark:border-slate-600 rounded-t-lg flex items-center justify-between">
                                 <div>
                                     /{{ $groupName === 'root' ? '' : $groupName }}
-                                    <span class="text-xs font-normal text-gray-500 dark:text-slate-400 ml-2">
+                                    <span class="text-xs font-normal text-slate-500 dark:text-slate-400 ml-2">
                                         ({{ count($groupRoutes) }} {{ count($groupRoutes) === 1 ? 'Route' : 'Routes' }})
                                     </span>
                                 </div>
@@ -57,10 +57,10 @@
                                 @if ($testableCount > 0)
                                     <div x-cloak x-show="testingGroup === '{{ $groupName }}'" class="flex flex-col gap-2">
                                         <div class="flex items-center gap-3">
-                                            <div class="text-xs text-gray-600 dark:text-slate-400">
+                                            <div class="text-xs text-slate-600 dark:text-slate-400">
                                                 (<span x-text="getGroupTestedCount('{{ $groupName }}')"></span>/{{ $testableCount }})
                                             </div>
-                                            <div class="w-32 bg-gray-200 rounded-full h-2">
+                                            <div class="w-32 bg-slate-200 dark:bg-slate-600 rounded-full h-2">
                                                 <div class="bg-blue-600 h-2 rounded-full transition-all duration-300"
                                                     :style="'width: ' + (getGroupTestedCount('{{ $groupName }}') / {{ $testableCount }} * 100) + '%'"></div>
                                             </div>
@@ -78,19 +78,19 @@
                             <div class="overflow-x-auto">
                                 <table class="w-full table-fixed border-collapse">
                                     <thead>
-                                        <tr class="bg-gray-50 dark:bg-slate-700 border-b border-gray-200 dark:border-slate-600">
-                                            <th class="w-20 px-4 py-3 text-xs font-semibold text-gray-700 uppercase tracking-wider text-center">Method</th>
-                                            <th class="px-4 py-3 text-xs font-semibold text-gray-700 uppercase tracking-wider text-left">URL</th>
-                                            <th class="w-32 px-4 py-3 text-xs font-semibold text-gray-700 uppercase tracking-wider text-center">Status</th>
-                                            <th class="w-24 px-4 py-3 text-xs font-semibold text-gray-700 uppercase tracking-wider text-center">Aktion</th>
+                                        <tr class="bg-slate-50 dark:bg-slate-700 border-b border-slate-200 dark:border-slate-600">
+                                            <th class="w-20 px-4 py-3 text-xs font-semibold text-slate-700 dark:text-slate-200 uppercase tracking-wider text-center">Method</th>
+                                            <th class="px-4 py-3 text-xs font-semibold text-slate-700 dark:text-slate-200 uppercase tracking-wider text-left">URL</th>
+                                            <th class="w-32 px-4 py-3 text-xs font-semibold text-slate-700 dark:text-slate-200 uppercase tracking-wider text-center">Status</th>
+                                            <th class="w-24 px-4 py-3 text-xs font-semibold text-slate-700 dark:text-slate-200 uppercase tracking-wider text-center">Aktion</th>
                                         </tr>
                                     </thead>
-                                    <tbody class="bg-white dark:bg-slate-800 divide-y divide-gray-200 dark:divide-slate-600">
+                                    <tbody class="bg-white dark:bg-slate-800 divide-y divide-slate-200 dark:divide-slate-600">
                                         @foreach ($groupRoutes as $route)
                                             @php
                                                 $index = $route['originalIndex'] ?? null;
                                             @endphp
-                                            <tr class="hover:bg-gray-50 dark:hover:bg-slate-700 transition-colors">
+                                            <tr class="hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors">
                                                 @switch($route['method'])
                                                     @case('GET')
                                                         <td class="px-4 py-3 text-center">
@@ -142,7 +142,7 @@
                                                 <td class="px-4 py-3 text-center">
                                                     @if ($route['status'] === 'pending')
                                                         <span
-                                                            class="inline-flex items-center justify-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+                                                            class="inline-flex items-center justify-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 dark:bg-blue-900/40 text-blue-800 dark:text-blue-300">
                                                             <svg class="animate-spin -ml-1 mr-2 h-3 w-3 text-blue-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                                                                 <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
                                                                 <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
@@ -157,7 +157,7 @@
                                                             </span>
                                                         @elseif ($route['status'] === 'error')
                                                             <span
-                                                                class="inline-flex items-center justify-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800"
+                                                                class="inline-flex items-center justify-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 dark:bg-red-900/40 text-red-800 dark:text-red-300"
                                                                 title="{{ $route['error'] ?? 'Fehler' }}">
                                                                 Fehler
                                                             </span>
@@ -174,16 +174,16 @@
                                                                 </span>
                                                             @else
                                                                 <span
-                                                                    class="inline-flex items-center justify-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800"
+                                                                    class="inline-flex items-center justify-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 dark:bg-red-900/40 text-red-800 dark:text-red-300"
                                                                     title="{{ $route['error'] ?? '' }}">
                                                                     {{ $route['status'] }}
                                                                 </span>
                                                             @endif
                                                         @else
-                                                            <span class="text-gray-400 dark:text-slate-500 text-sm">-</span>
+                                                            <span class="text-slate-400 dark:text-slate-500 text-sm">-</span>
                                                         @endif
                                                     @else
-                                                        <span class="text-gray-400 dark:text-slate-500 text-sm">-</span>
+                                                        <span class="text-slate-400 dark:text-slate-500 text-sm">-</span>
                                                     @endif
                                                 </td>
                                                 <td class="px-4 py-3 text-center">
@@ -194,7 +194,7 @@
                                                         Testen
                                                     </button>
                                                     @else
-                                                        <span class="text-gray-400 dark:text-slate-500 text-sm">-</span>
+                                                        <span class="text-slate-400 dark:text-slate-500 text-sm">-</span>
                                                     @endif
                                                 </td>
                                             </tr>
