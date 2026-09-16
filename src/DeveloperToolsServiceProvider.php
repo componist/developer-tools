@@ -25,15 +25,15 @@ class DeveloperToolsServiceProvider extends ServiceProvider
             // CreateCursorProjectRuleCommand::class, // optional: Artisan-Command, aktuell nicht benötigt
         ]);
 
-        Route::group(['middleware' => ['web']], function (): void {
-            $this->loadRoutesFrom(__DIR__ . '/../routes/web.php');
-        });
-
         $this->loadViewsFrom(__DIR__ . '/../resources/views', 'developerTools');
     }
 
     public function boot(): void
     {
+        Route::group(['middleware' => ['web']], function (): void {
+            $this->loadRoutesFrom(__DIR__ . '/../routes/web.php');
+        });
+
         Gate::define('manage-developer-tools', function (?User $user): bool {
             if ($user === null) {
                 return false;
