@@ -18,14 +18,13 @@
                 </div>
 
                 @if ($url)
-                    <button type="button" @click.prevent="$wire.getApiData"
-                        class="px-5 py-2 text-white bg-teal-500 rounded-md hover:bg-teal-600">
-                        CALL
-                    </button>
+                    <x:component::button.primary @click.prevent="$wire.getApiData">
+                        Aufrufen
+                    </x:component::button.primary>
                 @else
-                    <button type="button" disabled class="px-5 py-2 text-white rounded-md bg-slate-300 dark:bg-slate-600">
-                        CALL
-                    </button>
+                    <x:component::button.primary disabled>
+                        Aufrufen
+                    </x:component::button.primary>
                 @endif
 
             </div>

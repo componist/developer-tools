@@ -26,10 +26,9 @@
 
             <div class="flex items-end">
                 @if ($table && $generateFormRequestClass)
-                    <button type="button" wire:click="createFormRequestFile"
-                        class="m-[2px] rounded-md bg-teal-500 px-5 py-2 text-sm font-medium text-white hover:bg-teal-600 text-nowrap">
+                    <x:component::button.primary wire:click="createFormRequestFile">
                         Form Request erstellen ({{ $this->formRequestClassName }})
-                    </button>
+                    </x:component::button.primary>
                 @endif
             </div>
         </div>

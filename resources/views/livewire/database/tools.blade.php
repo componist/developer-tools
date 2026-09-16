@@ -24,11 +24,14 @@
             </table>
         </x:developerTools::block>
 
-        <div class="flex items-center gap-3 mt-7">
-            <button type="button" @click.prevent="$wire.clearTables"
-                class="px-5 py-1 text-white bg-teal-500 rounded-md hover:bg-teal-600">clear</button>
-            <button type="button" @click.prevent="$wire.deleteTables"
-                class="px-5 py-1 text-white bg-red-500 rounded-md hover:bg-red-600">delete</button>
+        <div class="mt-7 flex items-center gap-3">
+            <x:component::button.primary @click.prevent="$wire.clearTables">
+                Leeren
+            </x:component::button.primary>
+            <x:component::button.primary class="!bg-red-500 hover:!bg-red-600 focus:!ring-red-500"
+                @click.prevent="$wire.deleteTables">
+                Löschen
+            </x:component::button.primary>
         </div>
 
     </div>

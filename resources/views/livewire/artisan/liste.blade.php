@@ -29,7 +29,7 @@
                 @foreach ($group as $artisan)
                     <x:developerTools::item>
                         <button type="button"
-                            class="block px-5 py-1 text-white bg-teal-500 rounded-full shadow-sm hover:bg-teal-600"
+                            class="{{ \Componist\Core\Support\Ui::CHIP }}"
                             @click.prevent="navigator.clipboard.writeText('{{ $artisan['name'] }}'), showMsg = true, setTimeout(() => showMsg = false, 1000)">{{ $artisan['name'] }}</button>
 
                         <p class="text-slate-600 dark:text-slate-400">{{ $artisan['description'] }}</p>

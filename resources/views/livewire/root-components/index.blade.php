@@ -13,10 +13,9 @@
                 <x:developerTools::form.input type="text" wire:model.live='path' placeholder="{{ $path }}" />
             </div>
 
-            <button type="button" @click.prevent="$wire.scanIconPath()"
-                class="inline-block px-3 py-1 text-white bg-teal-500 rounded-lg hover:bg-teal-600">
+            <x:component::button.primary @click.prevent="$wire.scanIconPath()">
                 Auslesen
-            </button>
+            </x:component::button.primary>
         </div>
 
         <div class="mt-7">

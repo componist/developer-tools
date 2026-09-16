@@ -10,9 +10,9 @@
                                 <p>Class: <b>{{ $job['class'] }}</b></p>
                             </div>
                             <div>
-                                <button type="button" wire:click="runJob({{ json_encode($job) }})"
-                                    class="px-3 py-1 text-white bg-teal-500 rounded-md hover:bg-teal-600">Start
-                                    Job</button>
+                                <x:component::button.primary wire:click="runJob({{ json_encode($job) }})">
+                                    Job starten
+                                </x:component::button.primary>
                             </div>
                         </div>
                     </div>

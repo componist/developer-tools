@@ -19,9 +19,9 @@
     
             <div class="flex items-end">
                 @if ($table && $model && $model['existsModel'] === false)
-                    <button type="button" wire:click="createModelFile"
-                        class="px-5 py-2 text-white bg-teal-500 rounded-md hover:bg-teal-600 text-nowrap m-[2px]">Create new
-                        Model</button>
+                    <x:component::button.primary wire:click="createModelFile">
+                        Model erstellen
+                    </x:component::button.primary>
                 @endif
             </div>
         </div>
