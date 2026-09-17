@@ -15,7 +15,8 @@ class Liste extends Component
     {
         $jobClasses = [];
 
-        $files = File::allFiles(app_path('Jobs'));
+        $jobsPath = app_path('Jobs');
+        $files = is_dir($jobsPath) ? File::allFiles($jobsPath) : [];
 
         foreach ($files as $file) {
             $path = $file->getRealPath();
